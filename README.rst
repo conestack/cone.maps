@@ -19,6 +19,7 @@ It utilizes Leaflet JS (https://leafletjs.com/).
 Currently, tag v1.7.1 is included.
 See https://github.com/Leaflet/Leaflet/releases
 
+**THIS PACKAGE IS UNDER DEVELOPMENT AND NOT USABLE YET**
 
 Contributors
 ============
