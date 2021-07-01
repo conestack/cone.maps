@@ -36,5 +36,5 @@ jobs:
     - name: Run tests
       run: |
         python -m cone.maps.tests
-        coverage run --source src/cone/app -m cone.maps.tests
+        coverage run --source src/cone/maps -m cone.maps.tests
         coverage report
