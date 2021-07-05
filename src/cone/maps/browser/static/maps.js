@@ -34,23 +34,29 @@ if (window.cone === undefined) {
             this.layers = elem.data('map-layers');
             this.default_center = elem.data('map-center');
             this.default_zoom = elem.data('map-zoom');
+            this.map_options = elem.data('map-options');
             this.source = elem.data('map-source');
 
-            this.create_map();
-            this.create_layers();
-            this.create_controls();
+            this.create();
 
             elem.data('map-instance', this);
         }
 
+        create() {
+            this.create_map();
+            this.create_layers();
+            this.create_controls();
+        }
+
         create_map() {
-            this.map = L.map(this.id);
+            let opts = this.map_options;
+            this.map = L.map(this.id, opts ? opts : {});
             this.map.setView(this.default_center, this.default_zoom);
         }
 
         create_layers() {
-            for (let layer of this.layers) {
-                new L.tileLayer(layer.url_template, layer.options).addTo(this.map);
+            for (let l of this.layers) {
+                new L.tileLayer(l.url_template, l.options).addTo(this.map);
             }
         }
 
