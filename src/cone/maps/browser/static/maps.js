@@ -49,14 +49,13 @@ if (window.cone === undefined) {
         }
 
         create_map() {
-            let opts = this.map_options;
-            this.map = L.map(this.id, opts ? opts : {});
+            this.map = L.map(this.id, this.map_options);
             this.map.setView(this.default_center, this.default_zoom);
         }
 
         create_layers() {
             for (let l of this.layers) {
-                new L.tileLayer(l.url_template, l.options).addTo(this.map);
+                new L.tileLayer(l.urlTemplate, l.options).addTo(this.map);
             }
         }
 

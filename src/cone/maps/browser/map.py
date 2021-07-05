@@ -44,7 +44,7 @@ class MapTile(Tile):
     """HTML id of the map.
     """
 
-    map_options = None
+    map_options = {}
     """Map options passed to the leaflet map constructor.
 
     See: https://leafletjs.com/reference-1.7.1.html#map-l-map
@@ -52,15 +52,15 @@ class MapTile(Tile):
 
     map_layers = [{
         'title': 'OpenStreetMap',
-        'url_template': '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        'urlTemplate': '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         'options': {
             'attribution': 'OSM map data © <a href="http://openstreetmap.org">OSM</a>',
             'minZoom': 2,
             'maxZoom': 18
         }
     }]
-    """List of map layer definitions. Each layer definition consists of a title,
-    the URL template and the layer options passed to leaflet layer constructor.
+    """List of map tile layer definitions. Each layer definition consists of a
+    title, the URL template and the layer options passed to leaflet layer constructor.
 
     See: https://leafletjs.com/reference-1.7.1.html#tilelayer-l-tilelayer
     """

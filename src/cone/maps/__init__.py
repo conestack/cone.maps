@@ -15,7 +15,7 @@ def initialize_maps(config, global_config, settings):
     cfg.css.protected.append('maps-static/leaflet/leaflet.css')
 
     # protected JS
-    cfg.js.protected.append('maps-static/leaflet/leaflet.js')
+    cfg.js.protected.append('maps-static/leaflet/leaflet-src.js')
     cfg.js.protected.append('maps-static/maps.js')
 
     # add translation
