@@ -17,6 +17,18 @@ if (window.cone === undefined) {
         return ob;
     };
 
+    let layer_factories = maps.layer_factories = {};
+
+    layer_factories.tile_layer = function(cfg, map) {
+        new L.tileLayer(cfg.urlTemplate, cfg.options).addTo(map);
+    };
+
+    layer_factories.geo_json = function(cfg, map) {
+        $.getJSON(cfg.dataUrl, function(data) {
+            new L.geoJSON(data, cfg.options).addTo(map);
+        });
+    };
+
     maps.Map = class {
 
         static initialize(context) {
@@ -55,7 +67,7 @@ if (window.cone === undefined) {
 
         create_layers() {
             for (let l of this.layers) {
-                new L.tileLayer(l.urlTemplate, l.options).addTo(this.map);
+                layer_factories[l.factory](l, this.map);
             }
         }
 

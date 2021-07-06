@@ -51,18 +51,18 @@ class MapTile(Tile):
     """
 
     map_layers = [{
-        'title': 'OpenStreetMap',
+        'factory': 'tile_layer',
         'urlTemplate': '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         'options': {
+            'title': 'OpenStreetMap',
             'attribution': 'OSM map data © <a href="http://openstreetmap.org">OSM</a>',
             'minZoom': 2,
             'maxZoom': 18
         }
     }]
-    """List of map tile layer definitions. Each layer definition consists of a
-    title, the URL template and the layer options passed to leaflet layer constructor.
+    """List of map layer definitions.
 
-    See: https://leafletjs.com/reference-1.7.1.html#tilelayer-l-tilelayer
+    See: https://leafletjs.com/reference-1.7.1.html
     """
 
     map_center = [47.2688805, 11.3929127]
