@@ -51,10 +51,14 @@ class MapTile(Tile):
     """
 
     map_layers = [{
-        'factory': 'tile_layer',
+        # general layer options
+        'factory': 'tile_layer',   # layer factory
+        'category': 'base',        # base|overlay
+        'display': True,           # initial display
+        'title': 'OpenStreetMap',  # layer title
+        # factory specific layer options
         'urlTemplate': '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         'options': {
-            'title': 'OpenStreetMap',
             'attribution': 'OSM map data © <a href="http://openstreetmap.org">OSM</a>',
             'minZoom': 2,
             'maxZoom': 18

@@ -19,13 +19,13 @@ if (window.cone === undefined) {
 
     let layer_factories = maps.layer_factories = {};
 
-    layer_factories.tile_layer = function(cfg, map) {
-        new L.tileLayer(cfg.urlTemplate, cfg.options).addTo(map);
+    layer_factories.tile_layer = function(inst, cfg) {
+        inst.layer_created(new L.tileLayer(cfg.urlTemplate, cfg.options), cfg);
     };
 
-    layer_factories.geo_json = function(cfg, map) {
+    layer_factories.geo_json = function(inst, cfg) {
         $.getJSON(cfg.dataUrl, function(data) {
-            new L.geoJSON(data, cfg.options).addTo(map);
+            inst.layer_created(new L.geoJSON(data, cfg.options), cfg);
         });
     };
 
@@ -56,8 +56,8 @@ if (window.cone === undefined) {
 
         create() {
             this.create_map();
-            this.create_layers();
             this.create_controls();
+            this.create_layers();
         }
 
         create_map() {
@@ -65,13 +65,29 @@ if (window.cone === undefined) {
             this.map.setView(this.default_center, this.default_zoom);
         }
 
+        create_controls() {
+            this.map_layers = new L.control.layers([], [], {
+                collapsed: false
+            })
+            this.map_layers.addTo(this.map);
+        }
+
         create_layers() {
             for (let l of this.layers) {
-                layer_factories[l.factory](l, this.map);
+                layer_factories[l.factory](this, l);
             }
         }
 
-        create_controls() {
+        layer_created(layer, cfg) {
+            cfg.layer = layer;
+            if (cfg.display === undefined || cfg.display) {
+                layer.addTo(this.map);
+            }
+            if (cfg.category === 'base') {
+                this.map_layers.addBaseLayer(layer, cfg.title);
+            } else if (cfg.category === 'overlay') {
+                this.map_layers.addOverlay(layer, cfg.title);
+            }
         }
     }
 
