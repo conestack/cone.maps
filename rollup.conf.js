@@ -4,7 +4,7 @@ import {terser} from 'rollup-plugin-terser';
 const out_dir = 'src/cone/maps/browser/static';
 
 const outro = `
-window.maps = exports;
+window.cone_maps = exports;
 `;
 
 export default args => {
@@ -21,8 +21,7 @@ export default args => {
                 jquery: 'jQuery'
             },
             interop: 'default',
-            sourcemap: true,
-            sourcemapExcludeSources: true
+            sourcemap: false
         }],
         external: [
             'jquery'
@@ -40,8 +39,7 @@ export default args => {
                 jquery: 'jQuery'
             },
             interop: 'default',
-            sourcemap: true,
-            sourcemapExcludeSources: true
+            sourcemap: false
         });
     }
     return conf;

@@ -6,8 +6,8 @@ export * from './map.js';
 
 $(function() {
     if (window.ts !== undefined) {
-        ts.ajax.register(maps.Map.initialize, true);
+        ts.ajax.register(Map.initialize, true);
     } else {
-        bdajax.register(maps.Map.initialize, true);
+        bdajax.register(Map.initialize, true);
     }
 });

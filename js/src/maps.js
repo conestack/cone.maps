@@ -4,5 +4,5 @@ let api = {};
 
 Object.assign(api, map);
 
-let maps = api;
-export default maps;
+let cone_maps = api;
+export default cone_maps;

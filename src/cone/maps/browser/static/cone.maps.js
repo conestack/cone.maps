@@ -74,9 +74,9 @@
 
     $(function() {
         if (window.ts !== undefined) {
-            ts.ajax.register(maps.Map.initialize, true);
+            ts.ajax.register(Map.initialize, true);
         } else {
-            bdajax.register(maps.Map.initialize, true);
+            bdajax.register(Map.initialize, true);
         }
     });
 
@@ -87,10 +87,9 @@
     Object.defineProperty(exports, '__esModule', { value: true });
 
 
-    window.maps = exports;
+    window.cone_maps = exports;
 
 
     return exports;
 
 })({}, jQuery);
-//# sourceMappingURL=cone.maps.js.map
