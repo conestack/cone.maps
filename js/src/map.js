@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export lookup_factory = function(name) {
+export function lookup_factory(name) {
     let ob = window;
     for (let part of name.split('.')) {
         ob = ob[part];
@@ -9,26 +9,27 @@ export lookup_factory = function(name) {
         }
     }
     return ob;
-};
+}
 
-export layer_factories = {};
+let layer_factories = {};
+export {layer_factories};
 
 layer_factories.tile_layer = function(inst, cfg) {
     inst.layer_created(new L.tileLayer(cfg.urlTemplate, cfg.options), cfg);
-};
+}
 
 layer_factories.geo_json = function(inst, cfg) {
     $.getJSON(cfg.dataUrl, function(data) {
         inst.layer_created(new L.geoJSON(data, cfg.options), cfg);
     });
-};
+}
 
-export class Map = class {
+export class Map {
 
     static initialize(context) {
         $('div.cone_map', context).each(function() {
             let elem = $(this);
-            let factory = maps.lookup_factory(elem.data('map-factory'));
+            let factory = lookup_factory(elem.data('map-factory'));
             new factory(elem);
         });
     }

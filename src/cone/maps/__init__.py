@@ -22,7 +22,7 @@ def initialize_maps(config, global_config, settings):
     # protected JS
     cfg.js.protected.append('maps-static/leaflet/leaflet.js')
     cfg.js.protected.append('maps-static/leaflet-geosearch/geosearch.umd.js')
-    cfg.js.protected.append('maps-static/maps.js')
+    cfg.js.protected.append('maps-static/cone.maps.js')
 
     # add translation
     config.add_translation_dirs('cone.maps:locale/')
