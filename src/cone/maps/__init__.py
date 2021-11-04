@@ -11,11 +11,17 @@ logger = logging.getLogger('cone.maps')
 def initialize_maps(config, global_config, settings):
     # application startup initialization
 
+    # ignore yafowil leaflet dependencies if cone.maps is installed
+    cfg.yafowil.js_skip.add('yafowil.widget.location.dependencies')
+    cfg.yafowil.css_skip.add('yafowil.widget.location.dependencies')
+
     # protected CSS
     cfg.css.protected.append('maps-static/leaflet/leaflet.css')
+    cfg.css.protected.append('maps-static/leaflet-geosearch/geosearch.css')
 
     # protected JS
-    cfg.js.protected.append('maps-static/leaflet/leaflet-src.js')
+    cfg.js.protected.append('maps-static/leaflet/leaflet.js')
+    cfg.js.protected.append('maps-static/leaflet-geosearch/geosearch.umd.js')
     cfg.js.protected.append('maps-static/maps.js')
 
     # add translation
