@@ -15,12 +15,19 @@
 
 
 This package provides maps integration in to cone.app.
-It utilizes Leaflet JS (https://leafletjs.com/).
+It utilizes `Leaflet JS <https://leafletjs.com/>`_.
 
-Currently, tag v1.7.1 is included.
-See https://github.com/Leaflet/Leaflet/releases
+Currently, version `v1.7.1 <https://github.com/Leaflet/Leaflet/releases>_` is
+included.
 
-**THIS PACKAGE IS UNDER DEVELOPMENT AND NOT USABLE YET**
+For avoiding 1px gap between tiles,
+`Leaflet.TileLayer.NoGap <https://github.com/Leaflet/Leaflet.TileLayer.NoGap>`_
+is included.
+
+For geocoding,
+`leaflet-geosearch <https://smeijer.github.io/leaflet-geosearch>`_ (3.5.0)
+is included.
+
 
 Contributors
 ============

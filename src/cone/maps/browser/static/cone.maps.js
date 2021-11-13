@@ -35,6 +35,7 @@
             this.default_center = elem.data('map-center');
             this.default_zoom = elem.data('map-zoom');
             this.map_options = elem.data('map-options');
+            this.control_options = elem.data('map-control-options');
             this.source = elem.data('map-source');
             this.create();
             elem.data('map-instance', this);
@@ -49,9 +50,13 @@
             this.map.setView(this.default_center, this.default_zoom);
         }
         create_controls() {
-            this.map_layers = new L.control.layers([], [], {
-                collapsed: false
-            });
+            let base_maps = [],
+                overlay_maps = [];
+            this.map_layers = new L.control.layers(
+                base_maps,
+                overlay_maps,
+                this.control_options
+            );
             this.map_layers.addTo(this.map);
         }
         create_layers() {

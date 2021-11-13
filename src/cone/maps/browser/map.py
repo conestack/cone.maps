@@ -5,10 +5,10 @@ import json
 class MapTile(Tile):
     """Tile rendering a leaflet map.
 
-    Reference: https://leafletjs.com/reference-1.7.1.html
+    Reference: https://leafletjs.com/reference.html
     """
 
-    map_factory = 'cone.maps.Map'
+    map_factory = 'cone_maps.Map'
     """Factory used for map creation in Javascript.
 
     The definded factory must accept the map related DOM element as argument
@@ -17,22 +17,20 @@ class MapTile(Tile):
     It points to a class or function and does property lookup on window with
     '.' as delimiter, e.g:
 
-        'cone.maps.Map'
+        'cone_maps.Map'
 
     corresponds to:
 
-        cone: {
-            maps: {
-                Map: {}
-            }
+        cone_maps: {
+            Map: {}
         }
 
     If JS map factory needs to be customized, this is usually done by subclassing
-    'cone.maps.Map':
+    'cone_maps.Map':
 
         my_namespace = {};
 
-        my_namespace.Map = class extends cone.maps.Map {
+        my_namespace.Map = class extends cone_maps.Map {
             constructor(elem) {
                 elem.height(800);
                 super(elem);
@@ -47,7 +45,13 @@ class MapTile(Tile):
     map_options = {}
     """Map options passed to the leaflet map constructor.
 
-    See: https://leafletjs.com/reference-1.7.1.html#map-l-map
+    See: https://leafletjs.com/reference.html#map-l-map
+    """
+
+    map_control_options = {}
+    """Layers control options passed to the leaflet layers control constructor.
+
+    See: https://leafletjs.com/reference.html#control-layers
     """
 
     map_layers = [{
@@ -66,7 +70,7 @@ class MapTile(Tile):
     }]
     """List of map layer definitions.
 
-    See: https://leafletjs.com/reference-1.7.1.html
+    See: https://leafletjs.com/reference.html
     """
 
     map_center = [47.2688805, 11.3929127]
@@ -85,6 +89,7 @@ class MapTile(Tile):
             u'     id="{id}"'
             u'     data-map-factory="{factory}"'
             u'     data-map-options=\'{options}\''
+            u'     data-map-control-options=\'{control_options}\''
             u'     data-map-layers=\'{layers}\''
             u'     data-map-center=\'{center}\''
             u'     data-map-zoom="{zoom}"'
@@ -94,6 +99,7 @@ class MapTile(Tile):
             id=self.map_id,
             factory=self.map_factory,
             options=json.dumps(self.map_options),
+            control_options=json.dumps(self.map_control_options),
             layers=json.dumps(self.map_layers),
             center=json.dumps(self.map_center),
             zoom=self.map_zoom,
