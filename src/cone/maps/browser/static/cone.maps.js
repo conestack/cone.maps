@@ -67,13 +67,19 @@
         layer_created(layer, cfg) {
             cfg.layer = layer;
             if (cfg.display === undefined || cfg.display) {
-                layer.addTo(this.map);
+                this.add_layer(layer);
             }
             if (cfg.category === 'base') {
                 this.map_layers.addBaseLayer(layer, cfg.title);
             } else if (cfg.category === 'overlay') {
                 this.map_layers.addOverlay(layer, cfg.title);
             }
+        }
+        add_layer(layer) {
+            this.map.addLayer(layer);
+        }
+        remove_layer(layer) {
+            this.map.removeLayer(layer);
         }
     }
 
