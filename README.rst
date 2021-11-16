@@ -32,6 +32,11 @@ For grouping of map markers,
 `Leaflet.markercluster <https://github.com/Leaflet/Leaflet.markercluster>`_
 (1.5.3) is included.
 
+For defining active map area, e.g. if parts of a map is used as background,
+`Leaflet-active-area <https://github.com/Mappy/Leaflet-active-area>`_ (1.1.3)
+ is included.
+
+
 Contributors
 ============
 
