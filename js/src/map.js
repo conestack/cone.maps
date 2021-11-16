@@ -27,7 +27,7 @@ layer_factories.geo_json = function(inst, cfg) {
 export class Map {
 
     static initialize(context) {
-        $('div.cone_map', context).each(function() {
+        $('div.cone-map', context).each(function() {
             let elem = $(this);
             let factory = lookup_factory(elem.data('map-factory'));
             new factory(elem);

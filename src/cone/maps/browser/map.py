@@ -42,6 +42,17 @@ class MapTile(Tile):
     """HTML id of the map.
     """
 
+    map_css = 'cone-map'
+    """CSS class of the map element.
+
+    The default JS map implementation searches for
+    for all `div` elements with `cone-map` CSS class set and initializes map
+    instances for them.
+
+    If it's desired to completly customize map instancing on client side, this
+    property must be changed.
+    """
+
     map_options = {}
     """Map options passed to the leaflet map constructor.
 
@@ -85,7 +96,7 @@ class MapTile(Tile):
 
     def render(self):
         return (
-            u'<div class="cone_map"'
+            u'<div class="{css}"'
             u'     id="{id}"'
             u'     data-map-factory="{factory}"'
             u'     data-map-options=\'{options}\''
@@ -96,6 +107,7 @@ class MapTile(Tile):
             u'     data-map-source="{source}">'
             u'</div>'
         ).format(
+            css=self.map_css,
             id=self.map_id,
             factory=self.map_factory,
             options=json.dumps(self.map_options),
