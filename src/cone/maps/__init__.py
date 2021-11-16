@@ -22,8 +22,8 @@ def initialize_maps(config, global_config, settings):
     cfg.css.protected.append('maps-static/leaflet-markercluster/MarkerCluster.Default.css')
 
     # protected JS
-    cfg.js.protected.append('maps-static/leaflet/leaflet.js')
-    # cfg.js.protected.append('maps-static/leaflet-nogap/L.TileLayer.NoGap.js')
+    cfg.js.protected.append('maps-static/leaflet/leaflet-src.js')
+    cfg.js.protected.append('maps-static/leaflet-nogap/L.TileLayer.NoGap.js')
     cfg.js.protected.append('maps-static/leaflet-geosearch/geosearch.umd.js')
     cfg.js.protected.append('maps-static/leaflet-markercluster/leaflet.markercluster.js')
     cfg.js.protected.append('maps-static/leaflet-activearea/leaflet.activearea.js')
