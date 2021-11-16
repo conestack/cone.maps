@@ -18,11 +18,14 @@ def initialize_maps(config, global_config, settings):
     # protected CSS
     cfg.css.protected.append('maps-static/leaflet/leaflet.css')
     cfg.css.protected.append('maps-static/leaflet-geosearch/geosearch.css')
+    cfg.css.protected.append('maps-static/leaflet-mc/MarkerCluster.css')
+    cfg.css.protected.append('maps-static/leaflet-mc/MarkerCluster.Default.css')
 
     # protected JS
     cfg.js.protected.append('maps-static/leaflet/leaflet.js')
     cfg.js.protected.append('maps-static/leaflet-nogap/L.TileLayer.NoGap.js')
     cfg.js.protected.append('maps-static/leaflet-geosearch/geosearch.umd.js')
+    cfg.js.protected.append('maps-static/leaflet-mc/leaflet.markercluster.js')
     cfg.js.protected.append('maps-static/cone.maps.js')
 
     # add translation

@@ -28,6 +28,9 @@ For geocoding,
 `leaflet-geosearch <https://smeijer.github.io/leaflet-geosearch>`_ (3.5.0)
 is included.
 
+For grouping of map markers,
+`Leaflet.markercluster <https://github.com/Leaflet/Leaflet.markercluster>`_
+(1.5.3) is included.
 
 Contributors
 ============
