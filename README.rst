@@ -33,8 +33,10 @@ For grouping of map markers,
 (1.5.3) is included.
 
 For defining active map area, e.g. if parts of a map is used as background,
-`Leaflet-active-area <https://github.com/Mappy/Leaflet-active-area>`_ (1.1.3)
- is included.
+`Leaflet-active-area <https://github.com/Mappy/Leaflet-active-area>`_ is
+included. Currenlty the source is taken from
+`this <https://github.com/rnixx/Leaflet-active-area/tree/leaflet-1.7.1-compat>`_
+fork, which includes updates for Leaflet 1.7.1.
 
 
 Contributors

@@ -303,7 +303,7 @@ L.GridLayer.include({
             level.origin = map.project(map.unproject(map.getPixelOrigin()), zoom).round();
             level.zoom = zoom;
 
-            this._setZoomTransform(level, map.getCenter(), map.getZoom());
+            this._setZoomTransform(level, map.getCenter(true), map.getZoom());
 
             // force the browser to consider the newly added element for transition
             L.Util.falseFn(level.el.offsetWidth);
@@ -414,6 +414,7 @@ L.Popup.include({
                 containerHeight = this._container.offsetHeight,
                 containerWidth = this._containerWidth,
                 vpTopleft = L.point(vp.offsetLeft, vp.offsetTop),
+
                 layerPos = new L.Point(
                     this._containerLeft - vpTopleft.x,
                     - containerHeight - this._containerBottom - vpTopleft.y);
