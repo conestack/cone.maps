@@ -46,6 +46,11 @@ def initialize_maps(config, global_config, settings):
     if settings.get('cone.maps.activearea', 'false') == 'true':
         js_res.append('maps-static/leaflet-activearea/leaflet.activearea.js')
 
+    # proj4js and Proj4Leaflet
+    if settings.get('cone.maps.proj4', 'false') == 'true':
+        js_res.append('maps-static/proj4js/proj4.js')
+        js_res.append('maps-static/leaflet-proj4/proj4leaflet.js')
+
     # cone maps
     js_res.append('maps-static/cone.maps.js')
 

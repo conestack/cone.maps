@@ -92,7 +92,21 @@ class MapTile(Tile):
     """The default (initial) zoom level of the map
     """
 
-    map_marker_source = None
+    map_markers = []
+    """List of map markers to display.
+    """
+
+    map_markers_source = None
+    """JSON endpoint to fetch markers from.
+    """
+
+    map_marker_groups = []
+    """List of map marker groups to display.
+    """
+
+    map_marker_groups_source = None
+    """JSON endpoint to fetch marker groups from.
+    """
 
     def render(self):
         return (
@@ -104,7 +118,10 @@ class MapTile(Tile):
             u'     data-map-layers=\'{layers}\''
             u'     data-map-center=\'{center}\''
             u'     data-map-zoom="{zoom}"'
-            u'     data-map-source="{source}">'
+            u'     data-map-markers=\'{markers}\''
+            u'     data-map-markers-source="{markers_source}"'
+            u'     data-map-groups=\'{marker_groups}\''
+            u'     data-map-groups-source="{marker_groups_source}" >'
             u'</div>'
         ).format(
             css=self.map_css,
@@ -115,5 +132,8 @@ class MapTile(Tile):
             layers=json.dumps(self.map_layers),
             center=json.dumps(self.map_center),
             zoom=self.map_zoom,
-            source=self.map_marker_source
+            markers=self.map_markers,
+            markers_source=self.map_markers_source,
+            marker_groups=self.map_marker_groups,
+            marker_groups_source=self.map_marker_groups_source,
         )

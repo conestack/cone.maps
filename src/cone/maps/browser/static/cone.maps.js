@@ -36,7 +36,10 @@
             this.default_zoom = elem.data('map-zoom');
             this.map_options = elem.data('map-options');
             this.control_options = elem.data('map-control-options');
-            this.source = elem.data('map-source');
+            this.markers = elem.data('data-map-markers');
+            this.markers_source = elem.data('data-map-markers-source');
+            this.marker_groups = elem.data('data-map-groups');
+            this.marker_groups_source = elem.data('data-map-groups-source');
             this.create();
             elem.data('map-instance', this);
         }
