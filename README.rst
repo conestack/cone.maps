@@ -22,11 +22,11 @@ included.
 
 For avoiding 1px gap between tiles,
 `Leaflet.TileLayer.NoGap <https://github.com/Leaflet/Leaflet.TileLayer.NoGap>`_
-is included.
+`(ab4f107) <https://github.com/Leaflet/Leaflet.TileLayer.NoGap/commit/ab4f107fecb80e12ffbdc4ebbedf5f85b8da7173>`_ is included.
 
 For geocoding,
-`leaflet-geosearch <https://smeijer.github.io/leaflet-geosearch>`_ (3.5.0)
-is included.
+`leaflet-geosearch <https://smeijer.github.io/leaflet-geosearch>`_
+(3.5.0) is included.
 
 For grouping of map markers,
 `Leaflet.markercluster <https://github.com/Leaflet/Leaflet.markercluster>`_
@@ -63,3 +63,21 @@ Contributors
 ============
 
 - Robert Niederreiter
+
+
+TODO
+====
+
+- Include https://github.com/proj4js/proj4js
+
+- Include https://github.com/kartena/Proj4Leaflet
+
+- Default map marker rendering (from DOM elem data directly and from
+  JSON endpoint)
+
+- Default map markercluster rendering (from DOM elem data directly and from
+  JSON endpoint)
+
+- Geosearch on default map.
+
+- Activearea config on default map.
