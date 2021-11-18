@@ -13,11 +13,11 @@
     }
     let layer_factories = {};
     layer_factories.tile_layer = function(inst, cfg) {
-        inst.layer_created(new L.tileLayer(cfg.urlTemplate, cfg.options), cfg);
+        inst.layer_created(new L.TileLayer(cfg.urlTemplate, cfg.options), cfg);
     };
     layer_factories.geo_json = function(inst, cfg) {
         $.getJSON(cfg.dataUrl, function(data) {
-            inst.layer_created(new L.geoJSON(data, cfg.options), cfg);
+            inst.layer_created(new L.GeoJSON(data, cfg.options), cfg);
         });
     };
     class Map {
@@ -46,13 +46,13 @@
             this.create_layers();
         }
         create_map() {
-            this.map = L.map(this.id, this.map_options);
+            this.map = new L.Map(this.id, this.map_options);
             this.map.setView(this.default_center, this.default_zoom);
         }
         create_controls() {
             let base_maps = [],
                 overlay_maps = [];
-            this.map_layers = new L.control.layers(
+            this.map_layers = new L.control.Layers(
                 base_maps,
                 overlay_maps,
                 this.control_options
