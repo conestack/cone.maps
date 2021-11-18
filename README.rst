@@ -33,10 +33,30 @@ For grouping of map markers,
 (1.5.3) is included.
 
 For defining active map area, e.g. if parts of a map is used as background,
-`Leaflet-active-area <https://github.com/Mappy/Leaflet-active-area>`_ is
-included. Currenlty the source is taken from
-`this <https://github.com/rnixx/Leaflet-active-area/tree/leaflet-1.7.1-compat>`_
-fork, which includes updates for Leaflet 1.7.1.
+`Leaflet-active-area <https://github.com/Mappy/Leaflet-active-area>`_
+(1.2.0) is included.
+
+
+Resources
+---------
+
+The following ``cone.maps`` related application configuration options are
+available :
+
+- **cone.maps.public**: Flag whether browser resources are delivered for
+  unauthenticated users. Defaults to `false`.
+
+- **cone.maps.nogap**: Flag whether to include ``Leaflet.TileLayer.NoGap``
+  plugin. Defaults to `false`.
+
+- **cone.maps.geosearch**: Flag whether to include ``leaflet-geosearch``
+  plugin. Defaults to `false`.
+
+- **cone.maps.markercluster**: Flag whether to include ``Leaflet.markercluster``
+  plugin. Defaults to `false`.
+
+- **cone.maps.activearea**: Flag whether to include ``Leaflet-active-area``
+  plugin. Defaults to `false`.
 
 
 Contributors

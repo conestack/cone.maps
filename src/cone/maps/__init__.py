@@ -15,19 +15,39 @@ def initialize_maps(config, global_config, settings):
     cfg.yafowil.js_skip.add('yafowil.widget.location.dependencies')
     cfg.yafowil.css_skip.add('yafowil.widget.location.dependencies')
 
-    # protected CSS
-    cfg.css.protected.append('maps-static/leaflet/leaflet.css')
-    cfg.css.protected.append('maps-static/leaflet-geosearch/geosearch.css')
-    cfg.css.protected.append('maps-static/leaflet-markercluster/MarkerCluster.css')
-    cfg.css.protected.append('maps-static/leaflet-markercluster/MarkerCluster.Default.css')
+    # resources
+    if settings.get('cone.maps.public', 'false') == 'true':
+        css_res = cfg.css.public
+        js_res = cfg.js.public
+    else:
+        css_res = cfg.css.protected
+        js_res = cfg.js.protected
 
-    # protected JS
-    cfg.js.protected.append('maps-static/leaflet/leaflet.js')
-    cfg.js.protected.append('maps-static/leaflet-nogap/L.TileLayer.NoGap.js')
-    cfg.js.protected.append('maps-static/leaflet-geosearch/geosearch.umd.js')
-    cfg.js.protected.append('maps-static/leaflet-markercluster/leaflet.markercluster.js')
-    cfg.js.protected.append('maps-static/leaflet-activearea/leaflet.activearea.js')
-    cfg.js.protected.append('maps-static/cone.maps.js')
+    # leaflet core
+    css_res.append('maps-static/leaflet/leaflet.css')
+    js_res.append('maps-static/leaflet/leaflet.js')
+
+    # Leaflet.TileLayer.NoGap
+    if settings.get('cone.maps.nogap', 'false') == 'true':
+        js_res.append('maps-static/leaflet-nogap/L.TileLayer.NoGap.js')
+
+    # leaflet-geosearch
+    if settings.get('cone.maps.geosearch', 'false') == 'true':
+        css_res.append('maps-static/leaflet-geosearch/geosearch.css')
+        js_res.append('maps-static/leaflet-geosearch/geosearch.umd.js')
+
+    # Leaflet.markercluster
+    if settings.get('cone.maps.markercluster', 'false') == 'true':
+        css_res.append('maps-static/leaflet-markercluster/MarkerCluster.css')
+        css_res.append('maps-static/leaflet-markercluster/MarkerCluster.Default.css')
+        js_res.append('maps-static/leaflet-markercluster/leaflet.markercluster.js')
+
+    # Leaflet-active-area
+    if settings.get('cone.maps.activearea', 'false') == 'true':
+        js_res.append('maps-static/leaflet-activearea/leaflet.activearea.js')
+
+    # cone maps
+    js_res.append('maps-static/cone.maps.js')
 
     # add translation
     config.add_translation_dirs('cone.maps:locale/')
