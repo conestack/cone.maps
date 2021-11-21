@@ -1,8 +1,8 @@
 Changes
 =======
 
-0.1 (unreleased)
+0.1 (2021-11-21)
 ----------------
 
-- Initial.
+- Initial release.
   [rnix]

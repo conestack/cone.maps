@@ -1,4 +1,5 @@
 __pycache__
+/dist/
 /src/cone.maps.egg-info/
 /node_modules/
 /package-lock.json
