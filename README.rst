@@ -17,7 +17,6 @@
 This package provides maps integration in to cone.app.
 
 * As maps library, `Leaflet JS <https://leafletjs.com/>`_ (v1.7.1) is included.
-  It utilizes `Leaflet JS <https://leafletjs.com/>`_.
 
 * For avoiding 1px gap between tiles,
   `Leaflet.TileLayer.NoGap <https://github.com/Leaflet/Leaflet.TileLayer.NoGap>`_
