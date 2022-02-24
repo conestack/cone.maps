@@ -23,13 +23,19 @@ class TestMapsTile(TileTestCase):
 
         map_tile = MapTile()
         res = map_tile(model, request)
-        self.assertTrue(res.find('class="cone_map"') > -1)
+
+        self.assertTrue(res.find('class="cone-map"') > -1)
         self.assertTrue(res.find('id="map"') > -1)
-        self.assertTrue(res.find('data-map-factory="cone.maps.Map"') > -1)
+        self.assertTrue(res.find('data-map-factory="cone_maps.Map"') > -1)
+        self.assertTrue(res.find('data-map-options=') > -1)
+        self.assertTrue(res.find('data-map-control-options=') > -1)
         self.assertTrue(res.find('data-map-layers=') > -1)
         self.assertTrue(res.find('data-map-center=') > -1)
         self.assertTrue(res.find('data-map-zoom="8"') > -1)
-        self.assertTrue(res.find('data-map-source="None"') > -1)
+        self.assertTrue(res.find('data-map-markers=') > -1)
+        self.assertTrue(res.find('data-map-markers-source=') > -1)
+        self.assertTrue(res.find('data-map-groups=') > -1)
+        self.assertTrue(res.find('data-map-groups-source=') > -1)
 
 
 def run_tests():
