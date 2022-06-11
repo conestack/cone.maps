@@ -10,11 +10,11 @@ logger = logging.getLogger('cone.maps')
 def initialize_maps(config, global_config, settings):
     # application startup initialization
 
-    # add translation
-    config.add_translation_dirs('cone.maps:locale/')
-
     # static resources
     configure_resources(settings)
+
+    # add translation
+    config.add_translation_dirs('cone.maps:locale/')
 
     # scan browser package
     config.scan('cone.maps.browser')
