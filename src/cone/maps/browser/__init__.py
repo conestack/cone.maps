@@ -95,8 +95,8 @@ leaflet_activearea_resources.add(wr.ScriptResource(
 # proj4js
 proj4_resources = wr.ResourceGroup(
     name='cone.maps-proj4',
-    directory=os.path.join(resources_dir, 'proj4'),
-    path='proj4',
+    directory=os.path.join(resources_dir, 'proj4js'),
+    path='proj4js',
     group=resources
 )
 proj4_resources.add(wr.ScriptResource(
