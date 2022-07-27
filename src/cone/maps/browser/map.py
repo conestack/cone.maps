@@ -39,8 +39,7 @@ class MapTile(Tile):
     """
 
     map_id = 'map'
-    """HTML id of the map.
-    """
+    """HTML id of the map."""
 
     map_css = 'cone-map'
     """CSS class of the map element.
@@ -85,27 +84,54 @@ class MapTile(Tile):
     """
 
     map_center = [47.2688805, 11.3929127]
-    """The default (initial) center of the map as lat/lng.
-    """
+    """The default (initial) center of the map as lat/lng."""
 
     map_zoom = 8
-    """The default (initial) zoom level of the map
-    """
+    """The default (initial) zoom level of the map."""
 
     map_markers = []
     """List of map markers to display.
+
+    A map marker is represented by a dict like so:
+
+        {
+            'latlng': {
+                'lat': 47.2688805,
+                'lng': 11.3929127
+            },
+            'options': {
+                'title': 'Marker Tile'
+            },
+            'popup': {
+                'content': '<div>Marker Popup</div>',
+                'options': {
+                    'keepInView': True
+                }
+            }
+        }
+
+    For available marker options,
+    see https://leafletjs.com/reference.html#marker
+
+    For available popup options,
+    see https://leafletjs.com/reference.html#popup-option
     """
 
     map_markers_source = None
-    """JSON endpoint to fetch markers from.
+    """JSON endpoint to fetch markers from. For details about the expected
+    format, see ``map_markers``.
     """
 
     map_marker_groups = []
     """List of map marker groups to display.
+
+    Not implemented in JS yet.
     """
 
     map_marker_groups_source = None
     """JSON endpoint to fetch marker groups from.
+
+    Not implemented in JS yet.
     """
 
     def render(self):
@@ -132,8 +158,8 @@ class MapTile(Tile):
             layers=json.dumps(self.map_layers),
             center=json.dumps(self.map_center),
             zoom=self.map_zoom,
-            markers=self.map_markers,
-            markers_source=self.map_markers_source,
-            marker_groups=self.map_marker_groups,
-            marker_groups_source=self.map_marker_groups_source,
+            markers=json.dumps(self.map_markers),
+            markers_source=self.map_markers_source or '',
+            marker_groups=json.dumps(self.map_marker_groups),
+            marker_groups_source=self.map_marker_groups_source or ''
         )

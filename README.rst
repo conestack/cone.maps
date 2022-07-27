@@ -57,6 +57,9 @@ can be used as starting point for complex custom maps.
         """See ``cone.maps.browser.map`` for available tile options.
         """
 
+Not that ``cone.maps`` defines by default no height for maps. This must be
+done explicitely using CSS, or via custom JS map class.
+
 
 Resources
 ---------

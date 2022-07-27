@@ -43,10 +43,10 @@ export class Map {
         this.default_zoom = elem.data('map-zoom');
         this.map_options = elem.data('map-options');
         this.control_options = elem.data('map-control-options');
-        this.markers = elem.data('data-map-markers');
-        this.markers_source = elem.data('data-map-markers-source');
-        this.marker_groups = elem.data('data-map-groups');
-        this.marker_groups_source = elem.data('data-map-groups-source');
+        this.markers = elem.data('map-markers');
+        this.markers_source = elem.data('map-markers-source');
+        this.marker_groups = elem.data('map-groups');
+        this.marker_groups_source = elem.data('map-groups-source');
 
         this.create();
         elem.data('map-instance', this);
@@ -56,6 +56,7 @@ export class Map {
         this.create_map();
         this.create_controls();
         this.create_layers();
+        this.create_markers();
     }
 
     create_map() {
@@ -66,7 +67,7 @@ export class Map {
     create_controls() {
         let base_maps = [],
             overlay_maps = [];
-        this.map_layers = new L.control.Layers(
+        this.map_layers = new L.Control.Layers(
             base_maps,
             overlay_maps,
             this.control_options
@@ -98,5 +99,31 @@ export class Map {
 
     remove_layer(layer) {
         this.map.removeLayer(layer);
+    }
+
+    create_markers() {
+        for (let marker of this.markers) {
+            this.create_marker(marker);
+        }
+        if (this.markers_source) {
+            $.getJSON(this.markers_source, function(data) {
+                for (let marker of data) {
+                    this.create_marker(marker);
+                }
+            }.bind(this));
+        }
+        if (this.markers || this.markers_source) {
+            this.map.on('popupopen', function(evt) {
+                let popup = evt.popup;
+                ts.ajax.bind($(popup._contentNode));
+            });
+        }
+    }
+
+    create_marker(marker) {
+        let m = new L.Marker(marker.latlng, marker.options).addTo(this.map);
+        if (marker.popup) {
+            m.bindPopup(marker.popup.content, marker.popup.options);
+        }
     }
 }
