@@ -43,10 +43,10 @@ export class Map {
         this.default_zoom = elem.data('map-zoom');
         this.map_options = elem.data('map-options');
         this.control_options = elem.data('map-control-options');
-        this.markers = elem.data('data-map-markers');
-        this.markers_source = elem.data('data-map-markers-source');
-        this.marker_groups = elem.data('data-map-groups');
-        this.marker_groups_source = elem.data('data-map-groups-source');
+        this.markers = elem.data('map-markers');
+        this.markers_source = elem.data('map-markers-source');
+        this.marker_groups = elem.data('map-groups');
+        this.marker_groups_source = elem.data('map-groups-source');
 
         this.create();
         elem.data('map-instance', this);
@@ -56,6 +56,7 @@ export class Map {
         this.create_map();
         this.create_controls();
         this.create_layers();
+        this.create_markers();
     }
 
     create_map() {
@@ -66,7 +67,7 @@ export class Map {
     create_controls() {
         let base_maps = [],
             overlay_maps = [];
-        this.map_layers = new L.control.Layers(
+        this.map_layers = new L.Control.Layers(
             base_maps,
             overlay_maps,
             this.control_options
@@ -98,5 +99,11 @@ export class Map {
 
     remove_layer(layer) {
         this.map.removeLayer(layer);
+    }
+
+    create_markers() {
+        for (let m of this.markers) {
+            new L.Marker(m.latlng, m.options).addTo(this.map);
+        }
     }
 }

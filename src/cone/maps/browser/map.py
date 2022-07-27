@@ -94,6 +94,20 @@ class MapTile(Tile):
 
     map_markers = []
     """List of map markers to display.
+
+    A map marker is represented by a dict like so:
+
+        {
+            'latlng': {
+                'lat': 47.2688805,
+                'lng': 11.3929127
+            },
+            'options': {
+                'title': 'Marker Tile'
+            }
+        }
+
+    For available options see https://leafletjs.com/reference.html#marker
     """
 
     map_markers_source = None
@@ -132,8 +146,8 @@ class MapTile(Tile):
             layers=json.dumps(self.map_layers),
             center=json.dumps(self.map_center),
             zoom=self.map_zoom,
-            markers=self.map_markers,
+            markers=json.dumps(self.map_markers),
             markers_source=self.map_markers_source,
-            marker_groups=self.map_marker_groups,
+            marker_groups=json.dumps(self.map_marker_groups),
             marker_groups_source=self.map_marker_groups_source,
         )

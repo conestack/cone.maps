@@ -1,4 +1,4 @@
-(function (exports, $) {
+var cone_maps = (function (exports, $) {
     'use strict';
 
     function lookup_factory(name) {
@@ -36,10 +36,10 @@
             this.default_zoom = elem.data('map-zoom');
             this.map_options = elem.data('map-options');
             this.control_options = elem.data('map-control-options');
-            this.markers = elem.data('data-map-markers');
-            this.markers_source = elem.data('data-map-markers-source');
-            this.marker_groups = elem.data('data-map-groups');
-            this.marker_groups_source = elem.data('data-map-groups-source');
+            this.markers = elem.data('map-markers');
+            this.markers_source = elem.data('map-markers-source');
+            this.marker_groups = elem.data('map-groups');
+            this.marker_groups_source = elem.data('map-groups-source');
             this.create();
             elem.data('map-instance', this);
         }
@@ -47,6 +47,7 @@
             this.create_map();
             this.create_controls();
             this.create_layers();
+            this.create_markers();
         }
         create_map() {
             this.map = new L.Map(this.id, this.map_options);
@@ -55,7 +56,7 @@
         create_controls() {
             let base_maps = [],
                 overlay_maps = [];
-            this.map_layers = new L.control.Layers(
+            this.map_layers = new L.Control.Layers(
                 base_maps,
                 overlay_maps,
                 this.control_options
@@ -84,6 +85,11 @@
         remove_layer(layer) {
             this.map.removeLayer(layer);
         }
+        create_markers() {
+            for (let m of this.markers) {
+                new L.Marker(m.latlng, m.options).addTo(this.map);
+            }
+        }
     }
 
     $(function() {
@@ -99,10 +105,6 @@
     exports.lookup_factory = lookup_factory;
 
     Object.defineProperty(exports, '__esModule', { value: true });
-
-
-    window.cone_maps = exports;
-
 
     return exports;
 
