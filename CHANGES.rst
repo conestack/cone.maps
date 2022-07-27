@@ -7,6 +7,9 @@ Changes
 - Fix control layers creation in ``Map.create_controls``.
   [rnix]
 
+- Implement map markers from JSON source.
+  [rnix]
+
 - Implement static map markers.
   [rnix]
 

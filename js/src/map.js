@@ -102,8 +102,28 @@ export class Map {
     }
 
     create_markers() {
-        for (let m of this.markers) {
-            new L.Marker(m.latlng, m.options).addTo(this.map);
+        for (let marker of this.markers) {
+            this.create_marker(marker);
+        }
+        if (this.markers_source) {
+            $.getJSON(this.markers_source, function(data) {
+                for (let marker of data) {
+                    this.create_marker(marker);
+                }
+            }.bind(this));
+        }
+        if (this.markers || this.markers_source) {
+            this.map.on('popupopen', function(evt) {
+                let popup = evt.popup;
+                ts.ajax.bind($(popup._contentNode));
+            });
+        }
+    }
+
+    create_marker(marker) {
+        let m = new L.Marker(marker.latlng, marker.options).addTo(this.map);
+        if (marker.popup) {
+            m.bindPopup(marker.popup.content, marker.popup.options);
         }
     }
 }
