@@ -4,6 +4,12 @@ Changes
 0.2 (unreleased)
 ----------------
 
+- Map settings gets rendered as single data attribute.
+  [rnix]
+
+- Add ``MapTile.map_bounds`` property.
+  [rnix]
+
 - Fix control layers creation in ``Map.create_controls``.
   [rnix]
 

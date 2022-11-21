@@ -1,16 +1,5 @@
 import $ from 'jquery';
 
-export function lookup_factory(name) {
-    let ob = window;
-    for (let part of name.split('.')) {
-        ob = ob[part];
-        if (ob === undefined) {
-            throw "Cannot locate map factory: " + name;
-        }
-    }
-    return ob;
-}
-
 let layer_factories = {};
 export {layer_factories};
 
@@ -28,25 +17,28 @@ export class Map {
 
     static initialize(context) {
         $('div.cone-map', context).each(function() {
-            let elem = $(this);
-            let factory = lookup_factory(elem.data('map-factory'));
-            new factory(elem);
+            let elem = $(this),
+                settings = elem.data('map-settings'),
+                factory_path = settings.factory,
+                factory = ts.object_by_path(factory_path);
+            new factory(elem, settings);
         });
     }
 
-    constructor(elem) {
+    constructor(elem, settings) {
         this.elem = elem;
         this.id = elem.attr('id');
 
-        this.layers = elem.data('map-layers');
-        this.default_center = elem.data('map-center');
-        this.default_zoom = elem.data('map-zoom');
-        this.map_options = elem.data('map-options');
-        this.control_options = elem.data('map-control-options');
-        this.markers = elem.data('map-markers');
-        this.markers_source = elem.data('map-markers-source');
-        this.marker_groups = elem.data('map-groups');
-        this.marker_groups_source = elem.data('map-groups-source');
+        this.layers = settings.layers
+        this.default_center = settings.center
+        this.default_zoom = settings.zoom
+        this.default_bounds = settings.bounds
+        this.map_options = settings.options
+        this.control_options = settings.control_options
+        this.markers = settings.markers
+        this.markers_source = settings.markers_source
+        this.marker_groups = settings.groups
+        this.marker_groups_source = settings.groups_source
 
         this.create();
         elem.data('map-instance', this);
@@ -61,7 +53,11 @@ export class Map {
 
     create_map() {
         this.map = new L.Map(this.id, this.map_options);
-        this.map.setView(this.default_center, this.default_zoom);
+        if (this.default_bounds.length) {
+            this.map.fitBounds(this.default_bounds);
+        } else {
+            this.map.setView(this.default_center, this.default_zoom);
+        }
     }
 
     create_controls() {

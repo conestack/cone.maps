@@ -89,6 +89,10 @@ class MapTile(Tile):
     map_zoom = 8
     """The default (initial) zoom level of the map."""
 
+    map_bounds = []
+    """A list of geo points. If set, bounds take precedence over ``map_center``
+    and ``map_zoom`` and the map gets positioned to fit the bounds."""
+
     map_markers = []
     """List of map markers to display.
 
@@ -117,7 +121,7 @@ class MapTile(Tile):
     see https://leafletjs.com/reference.html#popup-option
     """
 
-    map_markers_source = None
+    map_markers_source = ''
     """JSON endpoint to fetch markers from. For details about the expected
     format, see ``map_markers``.
     """
@@ -128,38 +132,33 @@ class MapTile(Tile):
     Not implemented in JS yet.
     """
 
-    map_marker_groups_source = None
+    map_marker_groups_source = ''
     """JSON endpoint to fetch marker groups from.
 
     Not implemented in JS yet.
     """
 
     def render(self):
+        settings = dict(
+            factory=self.map_factory,
+            options=self.map_options,
+            control_options=self.map_control_options,
+            layers=self.map_layers,
+            center=self.map_center,
+            zoom=self.map_zoom,
+            bounds=self.map_bounds,
+            markers=self.map_markers,
+            markers_source=self.map_markers_source,
+            groups=self.map_marker_groups,
+            groups_source=self.map_marker_groups_source
+        )
         return (
             u'<div class="{css}"'
             u'     id="{id}"'
-            u'     data-map-factory="{factory}"'
-            u'     data-map-options=\'{options}\''
-            u'     data-map-control-options=\'{control_options}\''
-            u'     data-map-layers=\'{layers}\''
-            u'     data-map-center=\'{center}\''
-            u'     data-map-zoom="{zoom}"'
-            u'     data-map-markers=\'{markers}\''
-            u'     data-map-markers-source="{markers_source}"'
-            u'     data-map-groups=\'{marker_groups}\''
-            u'     data-map-groups-source="{marker_groups_source}" >'
+            u'     data-map-settings=\'{settings}\' >'
             u'</div>'
         ).format(
             css=self.map_css,
             id=self.map_id,
-            factory=self.map_factory,
-            options=json.dumps(self.map_options),
-            control_options=json.dumps(self.map_control_options),
-            layers=json.dumps(self.map_layers),
-            center=json.dumps(self.map_center),
-            zoom=self.map_zoom,
-            markers=json.dumps(self.map_markers),
-            markers_source=self.map_markers_source or '',
-            marker_groups=json.dumps(self.map_marker_groups),
-            marker_groups_source=self.map_marker_groups_source or ''
+            settings=json.dumps(settings)
         )
