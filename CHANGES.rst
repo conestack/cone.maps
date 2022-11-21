@@ -4,6 +4,9 @@ Changes
 0.2 (unreleased)
 ----------------
 
+- Map settings are defined via ``MapTile.map_settings`` property.
+  [rnix]
+
 - Map settings gets rendered as single data attribute.
   [rnix]
 

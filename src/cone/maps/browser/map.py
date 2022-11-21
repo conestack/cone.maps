@@ -11,29 +11,29 @@ class MapTile(Tile):
     map_factory = 'cone_maps.Map'
     """Factory used for map creation in Javascript.
 
-    The definded factory must accept the map related DOM element as argument
-    and is responsible to initialize the leaflet map.
+    The definded factory must accept the map related DOM element and the map
+    settings as arguments and is responsible to initialize the leaflet map.
 
-    It points to a class or function and does property lookup on window with
-    '.' as delimiter, e.g:
+    It points to a class or function and gets searched by dot separated path
+    on window, e.g:
 
         'cone_maps.Map'
 
     corresponds to:
 
-        cone_maps: {
-            Map: {}
+        window.cone_maps: {
+            Map: ...
         }
 
-    If JS map factory needs to be customized, this is usually done by subclassing
-    'cone_maps.Map':
+    If JS map factory needs to be customized, this is usually done by
+    subclassing 'cone_maps.Map':
 
         my_namespace = {};
 
         my_namespace.Map = class extends cone_maps.Map {
-            constructor(elem) {
+            constructor(elem, settings) {
                 elem.height(800);
-                super(elem);
+                super(elem, settings);
             }
         }
     """
@@ -138,8 +138,15 @@ class MapTile(Tile):
     Not implemented in JS yet.
     """
 
-    def render(self):
-        settings = dict(
+    @property
+    def map_settings(self):
+        """Dictionary containing map settings. This settings get passed to
+        the JS map constructor.
+
+        This property can be customized to pass additional settings to
+        custom map factory if needed.
+        """
+        return dict(
             factory=self.map_factory,
             options=self.map_options,
             control_options=self.map_control_options,
@@ -152,6 +159,8 @@ class MapTile(Tile):
             groups=self.map_marker_groups,
             groups_source=self.map_marker_groups_source
         )
+
+    def render(self):
         return (
             u'<div class="{css}"'
             u'     id="{id}"'
@@ -160,5 +169,5 @@ class MapTile(Tile):
         ).format(
             css=self.map_css,
             id=self.map_id,
-            settings=json.dumps(settings)
+            settings=json.dumps(self.map_settings)
         )
