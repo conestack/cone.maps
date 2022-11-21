@@ -32,16 +32,18 @@ class TestMapsTile(TileTestCase):
 
         self.assertTrue(res.find('class="cone-map"') > -1)
         self.assertTrue(res.find('id="map"') > -1)
-        self.assertTrue(res.find('data-map-factory="cone_maps.Map"') > -1)
-        self.assertTrue(res.find('data-map-options=') > -1)
-        self.assertTrue(res.find('data-map-control-options=') > -1)
-        self.assertTrue(res.find('data-map-layers=') > -1)
-        self.assertTrue(res.find('data-map-center=') > -1)
-        self.assertTrue(res.find('data-map-zoom="8"') > -1)
-        self.assertTrue(res.find('data-map-markers=') > -1)
-        self.assertTrue(res.find('data-map-markers-source=') > -1)
-        self.assertTrue(res.find('data-map-groups=') > -1)
-        self.assertTrue(res.find('data-map-groups-source=') > -1)
+        self.assertTrue(res.find('data-map-settings=') > -1)
+        self.assertTrue(res.find('"factory": "cone_maps.Map"') > -1)
+        self.assertTrue(res.find('"options": {') > -1)
+        self.assertTrue(res.find('"control_options": {') > -1)
+        self.assertTrue(res.find('"layers": [') > -1)
+        self.assertTrue(res.find('"center": [') > -1)
+        self.assertTrue(res.find('"zoom": 8') > -1)
+        self.assertTrue(res.find('"bounds": []') > -1)
+        self.assertTrue(res.find('"markers": []') > -1)
+        self.assertTrue(res.find('"markers_source": ""') > -1)
+        self.assertTrue(res.find('"groups": []') > -1)
+        self.assertTrue(res.find('"groups_source": ""') > -1)
 
 
 def np(path):
