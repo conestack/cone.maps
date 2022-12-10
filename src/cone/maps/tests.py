@@ -1,5 +1,5 @@
 from cone.app import testing
-from cone.app.browser.resources import RESOURCE_INCLUDES_KEY
+from cone.app.browser import resources
 from cone.app.model import BaseNode
 from cone.maps import browser
 from cone.maps.browser.map import MapTile
@@ -210,13 +210,23 @@ class TestResources(unittest.TestCase):
         self.assertEqual(len(styles), 0)
 
     def test_configure_resources(self):
-        configure_resources = browser.configure_resources
+        class TestConfigurator:
+            def __init__(self):
+                self.includes = {}
 
+            def register_resource(self, resource):
+                pass
+
+            def set_resource_include(self, name, value):
+                self.includes[name] = value
+
+        configure_resources = browser.configure_resources
+        config = TestConfigurator()
         settings = {
             'cone.maps.public': 'false'
         }
-        configure_resources(settings)
-        self.assertEqual(settings[RESOURCE_INCLUDES_KEY], {
+        configure_resources(config, settings)
+        self.assertEqual(config.includes, {
             'leaflet-js': 'authenticated',
             'leaflet-css': 'authenticated',
             'leaflet-nogap-js': False,
@@ -231,6 +241,7 @@ class TestResources(unittest.TestCase):
             'cone-maps-js': 'authenticated'
         })
 
+        config = TestConfigurator()
         settings = {
             'cone.maps.public': 'false',
             'cone.maps.nogap': 'true',
@@ -239,8 +250,8 @@ class TestResources(unittest.TestCase):
             'cone.maps.activearea': 'true',
             'cone.maps.proj4': 'true'
         }
-        configure_resources(settings)
-        self.assertEqual(settings[RESOURCE_INCLUDES_KEY], {
+        configure_resources(config, settings)
+        self.assertEqual(config.includes, {
             'leaflet-js': 'authenticated',
             'leaflet-css': 'authenticated',
             'leaflet-nogap-js': 'authenticated',
@@ -255,6 +266,7 @@ class TestResources(unittest.TestCase):
             'cone-maps-js': 'authenticated'
         })
 
+        config = TestConfigurator()
         settings = {
             'cone.maps.public': 'true',
             'cone.maps.nogap': 'true',
@@ -263,8 +275,8 @@ class TestResources(unittest.TestCase):
             'cone.maps.activearea': 'true',
             'cone.maps.proj4': 'true'
         }
-        configure_resources(settings)
-        self.assertEqual(settings[RESOURCE_INCLUDES_KEY], {
+        configure_resources(config, settings)
+        self.assertEqual(config.includes, {
             'leaflet-js': True,
             'leaflet-css': True,
             'leaflet-nogap-js': True,

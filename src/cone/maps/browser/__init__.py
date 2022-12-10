@@ -1,5 +1,3 @@
-from cone.app.browser.resources import resources
-from cone.app.browser.resources import set_resource_include
 import webresource as wr
 import os
 
@@ -11,8 +9,7 @@ resources_dir = os.path.join(os.path.dirname(__file__), 'static')
 leaflet_resources = wr.ResourceGroup(
     name='cone.maps-leaflet',
     directory=os.path.join(resources_dir, 'leaflet'),
-    path='leaflet',
-    group=resources
+    path='leaflet'
 )
 leaflet_resources.add(wr.ScriptResource(
     name='leaflet-js',
@@ -28,8 +25,7 @@ leaflet_resources.add(wr.StyleResource(
 leaflet_nogap_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-nogap',
     directory=os.path.join(resources_dir, 'leaflet-nogap'),
-    path='leaflet-nogap',
-    group=resources
+    path='leaflet-nogap'
 )
 leaflet_nogap_resources.add(wr.ScriptResource(
     name='leaflet-nogap-js',
@@ -41,8 +37,7 @@ leaflet_nogap_resources.add(wr.ScriptResource(
 leaflet_geosearch_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-geosearch',
     directory=os.path.join(resources_dir, 'leaflet-geosearch'),
-    path='leaflet-geosearch',
-    group=resources
+    path='leaflet-geosearch'
 )
 leaflet_geosearch_resources.add(wr.ScriptResource(
     name='leaflet-geosearch-js',
@@ -59,8 +54,7 @@ leaflet_geosearch_resources.add(wr.StyleResource(
 leaflet_markercluster_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-markercluster',
     directory=os.path.join(resources_dir, 'leaflet-markercluster'),
-    path='leaflet-markercluster',
-    group=resources
+    path='leaflet-markercluster'
 )
 leaflet_markercluster_resources.add(wr.ScriptResource(
     name='leaflet-markercluster-js',
@@ -83,8 +77,7 @@ leaflet_markercluster_resources.add(wr.StyleResource(
 leaflet_activearea_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-activearea',
     directory=os.path.join(resources_dir, 'leaflet-activearea'),
-    path='leaflet-activearea',
-    group=resources
+    path='leaflet-activearea'
 )
 leaflet_activearea_resources.add(wr.ScriptResource(
     name='leaflet-activearea-js',
@@ -96,8 +89,7 @@ leaflet_activearea_resources.add(wr.ScriptResource(
 proj4_resources = wr.ResourceGroup(
     name='cone.maps-proj4',
     directory=os.path.join(resources_dir, 'proj4js'),
-    path='proj4js',
-    group=resources
+    path='proj4js'
 )
 proj4_resources.add(wr.ScriptResource(
     name='proj4-js',
@@ -109,8 +101,7 @@ proj4_resources.add(wr.ScriptResource(
 leaflet_proj4_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-proj4',
     directory=os.path.join(resources_dir, 'leaflet-proj4'),
-    path='leaflet-proj4',
-    group=resources
+    path='leaflet-proj4'
 )
 leaflet_proj4_resources.add(wr.ScriptResource(
     name='leaflet-proj4-js',
@@ -122,8 +113,7 @@ leaflet_proj4_resources.add(wr.ScriptResource(
 cone_maps_resources = wr.ResourceGroup(
     name='cone.maps-maps',
     directory=os.path.join(resources_dir, 'maps'),
-    path='maps',
-    group=resources
+    path='maps'
 )
 cone_maps_resources.add(wr.ScriptResource(
     name='cone-maps-js',
@@ -133,39 +123,47 @@ cone_maps_resources.add(wr.ScriptResource(
 ))
 
 
-def configure_resources(settings):
+def configure_resources(config, settings):
     def included(name):
         return settings.get(name, 'false') == 'true'
 
     include = True if included('cone.maps.public') else 'authenticated'
 
     # leaflet core
-    set_resource_include(settings, 'leaflet-js', include)
-    set_resource_include(settings, 'leaflet-css', include)
+    config.register_resource(leaflet_resources)
+    config.set_resource_include('leaflet-js', include)
+    config.set_resource_include('leaflet-css', include)
 
     # Leaflet.TileLayer.NoGap
+    config.register_resource(leaflet_nogap_resources)
     nogap_include = include if included('cone.maps.nogap') else False
-    set_resource_include(settings, 'leaflet-nogap-js', nogap_include)
+    config.set_resource_include('leaflet-nogap-js', nogap_include)
 
     # leaflet-geosearch
+    config.register_resource(leaflet_geosearch_resources)
     geosearch_include = include if included('cone.maps.geosearch') else False
-    set_resource_include(settings, 'leaflet-geosearch-js', geosearch_include)
-    set_resource_include(settings, 'leaflet-geosearch-css', geosearch_include)
+    config.set_resource_include('leaflet-geosearch-js', geosearch_include)
+    config.set_resource_include('leaflet-geosearch-css', geosearch_include)
 
     # Leaflet.markercluster
+    config.register_resource(leaflet_markercluster_resources)
     mc_include = include if included('cone.maps.markercluster') else False
-    set_resource_include(settings, 'leaflet-markercluster-js', mc_include)
-    set_resource_include(settings, 'leaflet-markercluster-css', mc_include)
-    set_resource_include(settings, 'leaflet-markercluster-default-css', mc_include)
+    config.set_resource_include('leaflet-markercluster-js', mc_include)
+    config.set_resource_include('leaflet-markercluster-css', mc_include)
+    config.set_resource_include('leaflet-markercluster-default-css', mc_include)
 
     # Leaflet-active-area
+    config.register_resource(leaflet_activearea_resources)
     activearea_include = include if included('cone.maps.activearea') else False
-    set_resource_include(settings, 'leaflet-activearea-js', activearea_include)
+    config.set_resource_include('leaflet-activearea-js', activearea_include)
 
     # proj4js and Proj4Leaflet
+    config.register_resource(proj4_resources)
+    config.register_resource(leaflet_proj4_resources)
     proj4_include = include if included('cone.maps.proj4') else False
-    set_resource_include(settings, 'proj4-js', proj4_include)
-    set_resource_include(settings, 'leaflet-proj4-js', proj4_include)
+    config.set_resource_include('proj4-js', proj4_include)
+    config.set_resource_include('leaflet-proj4-js', proj4_include)
 
     # cone maps
-    set_resource_include(settings, 'cone-maps-js', include)
+    config.register_resource(cone_maps_resources)
+    config.set_resource_include('cone-maps-js', include)
