@@ -141,6 +141,23 @@ class TestResources(unittest.TestCase):
         self.assertEqual(styles[1].file_name, 'MarkerCluster.Default.css')
         self.assertTrue(os.path.exists(styles[1].file_path))
 
+    def test_leaflet_editable_resources(self):
+        resources_ = browser.leaflet_editable_resources
+        self.assertTrue(resources_.directory.endswith(np('/static/leaflet-editable')))
+        self.assertEqual(resources_.name, 'cone.maps-leaflet-editable')
+        self.assertEqual(resources_.path, 'leaflet-editable')
+
+        scripts = resources_.scripts
+        self.assertEqual(len(scripts), 1)
+
+        self.assertTrue(scripts[0].directory.endswith(np('/static/leaflet-editable')))
+        self.assertEqual(scripts[0].path, 'leaflet-editable')
+        self.assertEqual(scripts[0].file_name, 'Leaflet.Editable.js')
+        self.assertTrue(os.path.exists(scripts[0].file_path))
+
+        styles = resources_.styles
+        self.assertEqual(len(styles), 0)
+
     def test_leaflet_activearea_resources(self):
         resources_ = browser.leaflet_activearea_resources
         self.assertTrue(resources_.directory.endswith(np('/static/leaflet-activearea')))
@@ -229,6 +246,7 @@ class TestResources(unittest.TestCase):
         self.assertEqual(config.includes, {
             'leaflet-js': 'authenticated',
             'leaflet-css': 'authenticated',
+            'leaflet-editable-js': False,
             'leaflet-nogap-js': False,
             'leaflet-geosearch-js': False,
             'leaflet-geosearch-css': False,
@@ -247,6 +265,7 @@ class TestResources(unittest.TestCase):
             'cone.maps.nogap': 'true',
             'cone.maps.geosearch': 'true',
             'cone.maps.markercluster': 'true',
+            'cone.maps.editable': 'true',
             'cone.maps.activearea': 'true',
             'cone.maps.proj4': 'true'
         }
@@ -254,6 +273,7 @@ class TestResources(unittest.TestCase):
         self.assertEqual(config.includes, {
             'leaflet-js': 'authenticated',
             'leaflet-css': 'authenticated',
+            'leaflet-editable-js': 'authenticated',
             'leaflet-nogap-js': 'authenticated',
             'leaflet-geosearch-js': 'authenticated',
             'leaflet-geosearch-css': 'authenticated',
@@ -272,6 +292,7 @@ class TestResources(unittest.TestCase):
             'cone.maps.nogap': 'true',
             'cone.maps.geosearch': 'true',
             'cone.maps.markercluster': 'true',
+            'cone.maps.editable': 'true',
             'cone.maps.activearea': 'true',
             'cone.maps.proj4': 'true'
         }
@@ -279,6 +300,7 @@ class TestResources(unittest.TestCase):
         self.assertEqual(config.includes, {
             'leaflet-js': True,
             'leaflet-css': True,
+            'leaflet-editable-js': True,
             'leaflet-nogap-js': True,
             'leaflet-geosearch-js': True,
             'leaflet-geosearch-css': True,

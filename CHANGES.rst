@@ -4,6 +4,9 @@ Changes
 0.2 (unreleased)
 ----------------
 
+- Add ``Leaflet.Editable`` to resources.
+  [rnix]
+
 - Map settings are defined via ``MapTile.map_settings`` property.
   [rnix]
 
