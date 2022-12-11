@@ -73,6 +73,18 @@ leaflet_markercluster_resources.add(wr.StyleResource(
     resource='MarkerCluster.Default.css'
 ))
 
+# Leaflet.Editable
+leaflet_editable_resources = wr.ResourceGroup(
+    name='cone.maps-leaflet-editable',
+    directory=os.path.join(resources_dir, 'leaflet-editable'),
+    path='leaflet-editable'
+)
+leaflet_editable_resources.add(wr.ScriptResource(
+    name='leaflet-editable-js',
+    depends='leaflet-js',
+    resource='Leaflet.Editable.js'
+))
+
 # Leaflet-active-area
 leaflet_activearea_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-activearea',
@@ -151,6 +163,11 @@ def configure_resources(config, settings):
     config.set_resource_include('leaflet-markercluster-js', mc_include)
     config.set_resource_include('leaflet-markercluster-css', mc_include)
     config.set_resource_include('leaflet-markercluster-default-css', mc_include)
+
+    # Leaflet.Editable
+    config.register_resource(leaflet_editable_resources)
+    editable_include = include if included('cone.maps.editable') else False
+    config.set_resource_include('leaflet-editable-js', editable_include)
 
     # Leaflet-active-area
     config.register_resource(leaflet_activearea_resources)

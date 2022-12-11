@@ -30,6 +30,10 @@ This package provides maps integration in to cone.app.
   `Leaflet.markercluster <https://github.com/Leaflet/Leaflet.markercluster>`_
   (1.5.3) is included.
 
+* Make meking geometries editable in Leaflet,
+  `Leaflet.Editable <https://github.com/Leaflet/Leaflet.Editable>`_
+  (1.2.0) is included.
+
 * For defining active map area, e.g. if parts of a map is used as background,
   `Leaflet-active-area <https://github.com/Mappy/Leaflet-active-area>`_
   (1.2.0) is included.
@@ -77,6 +81,9 @@ available :
   plugin. Defaults to `false`.
 
 - **cone.maps.markercluster**: Flag whether to include ``Leaflet.markercluster``
+  plugin. Defaults to `false`.
+
+- **cone.maps.editable**: Flag whether to include ``Leaflet.Editable``
   plugin. Defaults to `false`.
 
 - **cone.maps.activearea**: Flag whether to include ``Leaflet-active-area``
