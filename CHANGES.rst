@@ -4,6 +4,9 @@ Changes
 0.2 (unreleased)
 ----------------
 
+- Add ``Path.Drag.js`` to resources.
+  [rnix]
+
 - Add ``Leaflet.Editable`` to resources.
   [rnix]
 

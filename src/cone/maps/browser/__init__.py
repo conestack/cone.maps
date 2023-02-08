@@ -85,6 +85,18 @@ leaflet_editable_resources.add(wr.ScriptResource(
     resource='Leaflet.Editable.js'
 ))
 
+# Leaflet Path.Drag.js
+leaflet_pathdrag_resources = wr.ResourceGroup(
+    name='cone.maps-leaflet-pathdrag',
+    directory=os.path.join(resources_dir, 'leaflet-pathdrag'),
+    path='leaflet-pathdrag'
+)
+leaflet_pathdrag_resources.add(wr.ScriptResource(
+    name='leaflet-pathdrag-js',
+    depends='leaflet-js',
+    resource='Path.Drag.js'
+))
+
 # Leaflet-active-area
 leaflet_activearea_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-activearea',
@@ -141,7 +153,7 @@ def configure_resources(config, settings):
 
     include = True if included('cone.maps.public') else 'authenticated'
 
-    # leaflet core
+    # Leaflet core
     config.register_resource(leaflet_resources)
     config.set_resource_include('leaflet-js', include)
     config.set_resource_include('leaflet-css', include)
@@ -168,6 +180,11 @@ def configure_resources(config, settings):
     config.register_resource(leaflet_editable_resources)
     editable_include = include if included('cone.maps.editable') else False
     config.set_resource_include('leaflet-editable-js', editable_include)
+
+    # Leaflet Path.Drag.js
+    config.register_resource(leaflet_pathdrag_resources)
+    pathdrag_include = include if included('cone.maps.pathdrag') else False
+    config.set_resource_include('leaflet-pathdrag-js', pathdrag_include)
 
     # Leaflet-active-area
     config.register_resource(leaflet_activearea_resources)
