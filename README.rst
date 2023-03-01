@@ -30,6 +30,14 @@ This package provides maps integration in to cone.app.
   `Leaflet.markercluster <https://github.com/Leaflet/Leaflet.markercluster>`_
   (1.5.3) is included.
 
+* For making geometries editable in Leaflet,
+  `Leaflet.Editable <https://github.com/Leaflet/Leaflet.Editable>`_
+  (1.2.0) is included.
+
+* For adding dragging capability to Leaflet paths,
+  `Path.Drag.js <https://github.com/Leaflet/Path.Drag.js>`_
+  (0.0.6) is included.
+
 * For defining active map area, e.g. if parts of a map is used as background,
   `Leaflet-active-area <https://github.com/Mappy/Leaflet-active-area>`_
   (1.2.0) is included.
@@ -57,6 +65,9 @@ can be used as starting point for complex custom maps.
         """See ``cone.maps.browser.map`` for available tile options.
         """
 
+Not that ``cone.maps`` defines by default no height for maps. This must be
+done explicitely using CSS, or via custom JS map class.
+
 
 Resources
 ---------
@@ -75,6 +86,12 @@ available :
 
 - **cone.maps.markercluster**: Flag whether to include ``Leaflet.markercluster``
   plugin. Defaults to `false`.
+
+- **cone.maps.editable**: Flag whether to include ``Leaflet.Editable`` plugin.
+  Defaults to `false`.
+
+- **cone.maps.pathdrag**: Flag whether to include ``Path.Drag.js`` plugin.
+  Defaults to `false`.
 
 - **cone.maps.activearea**: Flag whether to include ``Leaflet-active-area``
   plugin. Defaults to `false`.

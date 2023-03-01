@@ -11,36 +11,35 @@ class MapTile(Tile):
     map_factory = 'cone_maps.Map'
     """Factory used for map creation in Javascript.
 
-    The definded factory must accept the map related DOM element as argument
-    and is responsible to initialize the leaflet map.
+    The definded factory must accept the map related DOM element and the map
+    settings as arguments and is responsible to initialize the leaflet map.
 
-    It points to a class or function and does property lookup on window with
-    '.' as delimiter, e.g:
+    It points to a class or function and gets searched by dot separated path
+    on window, e.g:
 
         'cone_maps.Map'
 
     corresponds to:
 
-        cone_maps: {
-            Map: {}
+        window.cone_maps: {
+            Map: ...
         }
 
-    If JS map factory needs to be customized, this is usually done by subclassing
-    'cone_maps.Map':
+    If JS map factory needs to be customized, this is usually done by
+    subclassing 'cone_maps.Map':
 
         my_namespace = {};
 
         my_namespace.Map = class extends cone_maps.Map {
-            constructor(elem) {
+            constructor(elem, settings) {
                 elem.height(800);
-                super(elem);
+                super(elem, settings);
             }
         }
     """
 
     map_id = 'map'
-    """HTML id of the map.
-    """
+    """HTML id of the map."""
 
     map_css = 'cone-map'
     """CSS class of the map element.
@@ -85,55 +84,90 @@ class MapTile(Tile):
     """
 
     map_center = [47.2688805, 11.3929127]
-    """The default (initial) center of the map as lat/lng.
-    """
+    """The default (initial) center of the map as lat/lng."""
 
     map_zoom = 8
-    """The default (initial) zoom level of the map
-    """
+    """The default (initial) zoom level of the map."""
+
+    map_bounds = []
+    """A list of geo points. If set, bounds take precedence over ``map_center``
+    and ``map_zoom`` and the map gets positioned to fit the bounds."""
 
     map_markers = []
     """List of map markers to display.
+
+    A map marker is represented by a dict like so:
+
+        {
+            'latlng': {
+                'lat': 47.2688805,
+                'lng': 11.3929127
+            },
+            'options': {
+                'title': 'Marker Tile'
+            },
+            'popup': {
+                'content': '<div>Marker Popup</div>',
+                'options': {
+                    'keepInView': True
+                }
+            }
+        }
+
+    For available marker options,
+    see https://leafletjs.com/reference.html#marker
+
+    For available popup options,
+    see https://leafletjs.com/reference.html#popup-option
     """
 
-    map_markers_source = None
-    """JSON endpoint to fetch markers from.
+    map_markers_source = ''
+    """JSON endpoint to fetch markers from. For details about the expected
+    format, see ``map_markers``.
     """
 
     map_marker_groups = []
     """List of map marker groups to display.
+
+    Not implemented in JS yet.
     """
 
-    map_marker_groups_source = None
+    map_marker_groups_source = ''
     """JSON endpoint to fetch marker groups from.
+
+    Not implemented in JS yet.
     """
+
+    @property
+    def map_settings(self):
+        """Dictionary containing map settings. This settings get passed to
+        the JS map constructor.
+
+        This property can be customized to pass additional settings to
+        custom map factory if needed.
+        """
+        return dict(
+            factory=self.map_factory,
+            options=self.map_options,
+            control_options=self.map_control_options,
+            layers=self.map_layers,
+            center=self.map_center,
+            zoom=self.map_zoom,
+            bounds=self.map_bounds,
+            markers=self.map_markers,
+            markers_source=self.map_markers_source,
+            groups=self.map_marker_groups,
+            groups_source=self.map_marker_groups_source
+        )
 
     def render(self):
         return (
             u'<div class="{css}"'
             u'     id="{id}"'
-            u'     data-map-factory="{factory}"'
-            u'     data-map-options=\'{options}\''
-            u'     data-map-control-options=\'{control_options}\''
-            u'     data-map-layers=\'{layers}\''
-            u'     data-map-center=\'{center}\''
-            u'     data-map-zoom="{zoom}"'
-            u'     data-map-markers=\'{markers}\''
-            u'     data-map-markers-source="{markers_source}"'
-            u'     data-map-groups=\'{marker_groups}\''
-            u'     data-map-groups-source="{marker_groups_source}" >'
+            u'     data-map-settings=\'{settings}\' >'
             u'</div>'
         ).format(
             css=self.map_css,
             id=self.map_id,
-            factory=self.map_factory,
-            options=json.dumps(self.map_options),
-            control_options=json.dumps(self.map_control_options),
-            layers=json.dumps(self.map_layers),
-            center=json.dumps(self.map_center),
-            zoom=self.map_zoom,
-            markers=self.map_markers,
-            markers_source=self.map_markers_source,
-            marker_groups=self.map_marker_groups,
-            marker_groups_source=self.map_marker_groups_source,
+            settings=json.dumps(self.map_settings)
         )
