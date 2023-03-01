@@ -247,6 +247,7 @@ class TestResources(unittest.TestCase):
             'leaflet-js': 'authenticated',
             'leaflet-css': 'authenticated',
             'leaflet-editable-js': False,
+            'leaflet-pathdrag-js': False,
             'leaflet-nogap-js': False,
             'leaflet-geosearch-js': False,
             'leaflet-geosearch-css': False,
@@ -266,6 +267,7 @@ class TestResources(unittest.TestCase):
             'cone.maps.geosearch': 'true',
             'cone.maps.markercluster': 'true',
             'cone.maps.editable': 'true',
+            'cone.maps.pathdrag': 'true',
             'cone.maps.activearea': 'true',
             'cone.maps.proj4': 'true'
         }
@@ -274,6 +276,7 @@ class TestResources(unittest.TestCase):
             'leaflet-js': 'authenticated',
             'leaflet-css': 'authenticated',
             'leaflet-editable-js': 'authenticated',
+            'leaflet-pathdrag-js': 'authenticated',
             'leaflet-nogap-js': 'authenticated',
             'leaflet-geosearch-js': 'authenticated',
             'leaflet-geosearch-css': 'authenticated',
@@ -293,6 +296,7 @@ class TestResources(unittest.TestCase):
             'cone.maps.geosearch': 'true',
             'cone.maps.markercluster': 'true',
             'cone.maps.editable': 'true',
+            'cone.maps.pathdrag': 'true',
             'cone.maps.activearea': 'true',
             'cone.maps.proj4': 'true'
         }
@@ -301,6 +305,7 @@ class TestResources(unittest.TestCase):
             'leaflet-js': True,
             'leaflet-css': True,
             'leaflet-editable-js': True,
+            'leaflet-pathdrag-js': True,
             'leaflet-nogap-js': True,
             'leaflet-geosearch-js': True,
             'leaflet-geosearch-css': True,
