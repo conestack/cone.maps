@@ -4,6 +4,12 @@ Changes
 0.2 (unreleased)
 ----------------
 
+- Setup Makefile.
+  [lenadax]
+
+- Run tests with pytest.
+  [lenadax]
+
 - Add ``Path.Drag.js`` to resources.
   [rnix]
 

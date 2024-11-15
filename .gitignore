@@ -3,3 +3,10 @@ __pycache__
 /src/cone.maps.egg-info/
 /node_modules/
 /package-lock.json
+.coverage
+/.mxmake/
+/venv/
+/.venv/
+/requirements-mxdev.txt
+/sources/
+/constraints-mxdev.txt
