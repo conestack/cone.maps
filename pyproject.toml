@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cone.maps"
+version = "0.2.dev0"
+description = "Maps integration into cone using leaflet.js."
+readme = "README.rst"
+license = {text = "Simplified BSD"}
+authors = [{name = "Cone Contributors", email = "dev@conestack.org"}]
+keywords = ["node", "pyramid", "cone", "web"]
+classifiers = [
+    "Environment :: Web Environment",
+    "Programming Language :: Python",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+dependencies = [
+    "cone.app",
+    "yafowil.widget.location",
+]
+
+[project.optional-dependencies]
+test = [
+    "zope.testrunner",
+]
+
+[project.urls]
+Homepage = "http://github.com/conestack/cone.maps"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools]
+zip-safe = false
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.zest-releaser]
+create-wheel = true

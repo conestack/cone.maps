@@ -3,3 +3,4 @@ __pycache__
 /src/cone.maps.egg-info/
 /node_modules/
 /package-lock.json
+/build
