@@ -1,8 +1,8 @@
 Changes
 =======
 
-0.2 (unreleased)
-----------------
+1.1.0 (unreleased)
+------------------
 
 - Add ``Path.Drag.js`` to resources.
   [rnix]

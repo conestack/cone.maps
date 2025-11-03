@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cone.maps"
-version = "0.2.dev0"
+version = "1.1.0.dev0"
 description = "Maps integration into cone using leaflet.js."
 readme = "README.rst"
 license = {text = "Simplified BSD"}
