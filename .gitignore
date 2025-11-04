@@ -1,6 +1,14 @@
-__pycache__
+*.egg-info
+*.pyc
+/.coverage
+/.mxmake/
+/.venv/
+/build/
+/constraints-mxdev.txt
 /dist/
-/src/cone.maps.egg-info/
 /node_modules/
 /package-lock.json
-/build
+/requirements-mxdev.txt
+/sources/
+/venv/
+__pycache__

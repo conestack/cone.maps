@@ -27,7 +27,7 @@ dependencies = [
 
 [project.optional-dependencies]
 test = [
-    "zope.testrunner",
+    "cone.app[test]",
 ]
 
 [project.urls]
