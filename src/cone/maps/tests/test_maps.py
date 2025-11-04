@@ -317,19 +317,3 @@ class TestResources(unittest.TestCase):
             'leaflet-proj4-js': True,
             'cone-maps-js': True
         })
-
-
-def run_tests():
-    from cone.maps import tests
-    from zope.testrunner.runner import Runner
-
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.findTestCases(tests))
-
-    runner = Runner(found_suites=[suite])
-    runner.run()
-    sys.exit(int(runner.failed))
-
-
-if __name__ == '__main__':
-    run_tests()
