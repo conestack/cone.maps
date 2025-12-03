@@ -6,12 +6,9 @@
     :target: https://pypi.python.org/pypi/cone.maps
     :alt: Number of PyPI downloads
 
-.. image:: https://github.com/conestack/cone.maps/actions/workflows/python-package.yml/badge.svg
-    :target: https://github.com/conestack/cone.maps/actions/workflows/python-package.yml
-    :alt: Package build
-
-.. image:: https://coveralls.io/repos/github/bluedynamics/cone.maps/badge.svg?branch=master
-    :target: https://coveralls.io/github/bluedynamics/cone.maps?branch=master
+.. image:: https://github.com/conestack/cone.maps/actions/workflows/test.yml/badge.svg
+    :target: https://github.com/conestack/cone.maps/actions/workflows/test.yml
+    :alt: Test cone.maps
 
 
 This package provides maps integration in to cone.app.
