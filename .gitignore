@@ -12,3 +12,4 @@
 /sources/
 /venv/
 __pycache__
+/coverage/
