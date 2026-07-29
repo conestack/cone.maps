@@ -5,6 +5,18 @@ import os
 resources_dir = os.path.join(os.path.dirname(__file__), 'static')
 
 
+# The leaflet resource names below are deliberately shared with other packages
+# shipping their own leaflet copy - most notably ``yafowil.widget.location``.
+# The application registering resources first wins the name based
+# deduplication in ``cone.app``, so only one leaflet ends up being delivered
+# and both consumers are served by it.
+#
+# This only works as long as the competing copies are interchangeable. When
+# combining cone.maps with the location widget, make sure both ship the same
+# leaflet version and plugin set - otherwise the widget silently runs against
+# a leaflet it was not built for.
+
+
 # leaflet core
 leaflet_resources = wr.ResourceGroup(
     name='cone.maps-leaflet',
