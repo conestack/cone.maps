@@ -162,12 +162,8 @@ class MapTile(Tile):
 
     def render(self):
         return (
-            u'<div class="{css}"'
-            u'     id="{id}"'
-            u'     data-map-settings=\'{settings}\' >'
-            u'</div>'
-        ).format(
-            css=self.map_css,
-            id=self.map_id,
-            settings=json.dumps(self.map_settings)
+            f'<div class="{self.map_css}"'
+            f'     id="{self.map_id}"'
+            f'     data-map-settings=\'{json.dumps(self.map_settings)}\' >'
+            '</div>'
         )

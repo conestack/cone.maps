@@ -1,11 +1,9 @@
 from cone.app import testing
-from cone.app.browser import resources
 from cone.app.model import BaseNode
 from cone.maps import browser
 from cone.maps.browser.map import MapTile
 from cone.tile.tests import TileTestCase
 import os
-import sys
 import unittest
 
 
