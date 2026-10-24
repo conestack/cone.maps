@@ -1,8 +1,8 @@
 import * as map from './map.js';
 
-let api = {};
+const api = {};
 
 Object.assign(api, map);
 
-let cone_maps = api;
+const cone_maps = api;
 export default cone_maps;

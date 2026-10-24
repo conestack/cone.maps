@@ -1,13 +1,13 @@
 import $ from 'jquery';
 
-import {Map} from './map.js';
+import { Map as ConeMap } from './map.js';
 
 export * from './map.js';
 
-$(function() {
+$(() => {
     if (window.ts !== undefined) {
-        ts.ajax.register(Map.initialize, true);
+        ts.ajax.register(ConeMap.initialize, true);
     } else {
-        bdajax.register(Map.initialize, true);
+        bdajax.register(ConeMap.initialize, true);
     }
 });

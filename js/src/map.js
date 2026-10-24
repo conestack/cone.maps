@@ -1,23 +1,24 @@
 import $ from 'jquery';
 
-let layer_factories = {};
-export {layer_factories};
+const layer_factories = {};
 
-layer_factories.tile_layer = function(inst, cfg) {
+export { layer_factories };
+
+layer_factories.tile_layer = (inst, cfg) => {
     inst.layer_created(new L.TileLayer(cfg.urlTemplate, cfg.options), cfg);
-}
+};
 
-layer_factories.geo_json = function(inst, cfg) {
-    $.getJSON(cfg.dataUrl, function(data) {
+layer_factories.geo_json = (inst, cfg) => {
+    $.getJSON(cfg.dataUrl, (data) => {
         inst.layer_created(new L.GeoJSON(data, cfg.options), cfg);
     });
-}
+};
 
+// biome-ignore lint/suspicious/noShadowRestrictedNames: Map is public API
 export class Map {
-
     static initialize(context) {
-        $('div.cone-map', context).each(function() {
-            let elem = $(this),
+        $('div.cone-map', context).each(function () {
+            const elem = $(this),
                 settings = elem.data('map-settings'),
                 factory_path = settings.factory,
                 factory = ts.object_by_path(factory_path);
@@ -29,16 +30,16 @@ export class Map {
         this.elem = elem;
         this.id = elem.attr('id');
 
-        this.layers = settings.layers
-        this.default_center = settings.center
-        this.default_zoom = settings.zoom
-        this.default_bounds = settings.bounds
-        this.map_options = settings.options
-        this.control_options = settings.control_options
-        this.markers = settings.markers
-        this.markers_source = settings.markers_source
-        this.marker_groups = settings.groups
-        this.marker_groups_source = settings.groups_source
+        this.layers = settings.layers;
+        this.default_center = settings.center;
+        this.default_zoom = settings.zoom;
+        this.default_bounds = settings.bounds;
+        this.map_options = settings.options;
+        this.control_options = settings.control_options;
+        this.markers = settings.markers;
+        this.markers_source = settings.markers_source;
+        this.marker_groups = settings.groups;
+        this.marker_groups_source = settings.groups_source;
 
         this.create();
         elem.data('map-instance', this);
@@ -61,18 +62,14 @@ export class Map {
     }
 
     create_controls() {
-        let base_maps = [],
+        const base_maps = [],
             overlay_maps = [];
-        this.map_layers = new L.Control.Layers(
-            base_maps,
-            overlay_maps,
-            this.control_options
-        );
+        this.map_layers = new L.Control.Layers(base_maps, overlay_maps, this.control_options);
         this.map_layers.addTo(this.map);
     }
 
     create_layers() {
-        for (let l of this.layers) {
+        for (const l of this.layers) {
             layer_factories[l.factory](this, l);
         }
     }
@@ -98,26 +95,29 @@ export class Map {
     }
 
     create_markers() {
-        for (let marker of this.markers) {
+        for (const marker of this.markers) {
             this.create_marker(marker);
         }
         if (this.markers_source) {
-            $.getJSON(this.markers_source, function(data) {
-                for (let marker of data) {
-                    this.create_marker(marker);
-                }
-            }.bind(this));
+            $.getJSON(
+                this.markers_source,
+                function (data) {
+                    for (const marker of data) {
+                        this.create_marker(marker);
+                    }
+                }.bind(this),
+            );
         }
         if (this.markers || this.markers_source) {
-            this.map.on('popupopen', function(evt) {
-                let popup = evt.popup;
+            this.map.on('popupopen', (evt) => {
+                const popup = evt.popup;
                 ts.ajax.bind($(popup._contentNode));
             });
         }
     }
 
     create_marker(marker) {
-        let m = new L.Marker(marker.latlng, marker.options).addTo(this.map);
+        const m = new L.Marker(marker.latlng, marker.options).addTo(this.map);
         if (marker.popup) {
             m.bindPopup(marker.popup.content, marker.popup.options);
         }
