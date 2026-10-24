@@ -1,5 +1,5 @@
-import webresource as wr
 import os
+import webresource as wr
 
 
 resources_dir = os.path.join(os.path.dirname(__file__), 'static')
@@ -21,142 +21,147 @@ resources_dir = os.path.join(os.path.dirname(__file__), 'static')
 leaflet_resources = wr.ResourceGroup(
     name='cone.maps-leaflet',
     directory=os.path.join(resources_dir, 'leaflet'),
-    path='leaflet'
+    path='leaflet',
 )
-leaflet_resources.add(wr.ScriptResource(
-    name='leaflet-js',
-    resource='leaflet-src.js',
-    compressed='leaflet.js'
-))
-leaflet_resources.add(wr.StyleResource(
-    name='leaflet-css',
-    resource='leaflet.css'
-))
+leaflet_resources.add(
+    wr.ScriptResource(
+        name='leaflet-js', resource='leaflet-src.js', compressed='leaflet.js'
+    )
+)
+leaflet_resources.add(wr.StyleResource(name='leaflet-css', resource='leaflet.css'))
 
 # Leaflet.TileLayer.NoGap
 leaflet_nogap_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-nogap',
     directory=os.path.join(resources_dir, 'leaflet-nogap'),
-    path='leaflet-nogap'
+    path='leaflet-nogap',
 )
-leaflet_nogap_resources.add(wr.ScriptResource(
-    name='leaflet-nogap-js',
-    depends='leaflet-js',
-    resource='L.TileLayer.NoGap.js'
-))
+leaflet_nogap_resources.add(
+    wr.ScriptResource(
+        name='leaflet-nogap-js', depends='leaflet-js', resource='L.TileLayer.NoGap.js'
+    )
+)
 
 # leaflet-geosearch
 leaflet_geosearch_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-geosearch',
     directory=os.path.join(resources_dir, 'leaflet-geosearch'),
-    path='leaflet-geosearch'
+    path='leaflet-geosearch',
 )
-leaflet_geosearch_resources.add(wr.ScriptResource(
-    name='leaflet-geosearch-js',
-    depends='leaflet-js',
-    resource='geosearch.umd.js'
-))
-leaflet_geosearch_resources.add(wr.StyleResource(
-    name='leaflet-geosearch-css',
-    depends='leaflet-css',
-    resource='geosearch.css'
-))
+leaflet_geosearch_resources.add(
+    wr.ScriptResource(
+        name='leaflet-geosearch-js', depends='leaflet-js', resource='geosearch.umd.js'
+    )
+)
+leaflet_geosearch_resources.add(
+    wr.StyleResource(
+        name='leaflet-geosearch-css', depends='leaflet-css', resource='geosearch.css'
+    )
+)
 
 # Leaflet.markercluster
 leaflet_markercluster_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-markercluster',
     directory=os.path.join(resources_dir, 'leaflet-markercluster'),
-    path='leaflet-markercluster'
+    path='leaflet-markercluster',
 )
-leaflet_markercluster_resources.add(wr.ScriptResource(
-    name='leaflet-markercluster-js',
-    depends='leaflet-js',
-    resource='leaflet.markercluster-src.js',
-    compressed='leaflet.markercluster.js'
-))
-leaflet_markercluster_resources.add(wr.StyleResource(
-    name='leaflet-markercluster-css',
-    depends='leaflet-css',
-    resource='MarkerCluster.css'
-))
-leaflet_markercluster_resources.add(wr.StyleResource(
-    name='leaflet-markercluster-default-css',
-    depends='leaflet-markercluster-css',
-    resource='MarkerCluster.Default.css'
-))
+leaflet_markercluster_resources.add(
+    wr.ScriptResource(
+        name='leaflet-markercluster-js',
+        depends='leaflet-js',
+        resource='leaflet.markercluster-src.js',
+        compressed='leaflet.markercluster.js',
+    )
+)
+leaflet_markercluster_resources.add(
+    wr.StyleResource(
+        name='leaflet-markercluster-css',
+        depends='leaflet-css',
+        resource='MarkerCluster.css',
+    )
+)
+leaflet_markercluster_resources.add(
+    wr.StyleResource(
+        name='leaflet-markercluster-default-css',
+        depends='leaflet-markercluster-css',
+        resource='MarkerCluster.Default.css',
+    )
+)
 
 # Leaflet.Editable
 leaflet_editable_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-editable',
     directory=os.path.join(resources_dir, 'leaflet-editable'),
-    path='leaflet-editable'
+    path='leaflet-editable',
 )
-leaflet_editable_resources.add(wr.ScriptResource(
-    name='leaflet-editable-js',
-    depends='leaflet-js',
-    resource='Leaflet.Editable.js'
-))
+leaflet_editable_resources.add(
+    wr.ScriptResource(
+        name='leaflet-editable-js', depends='leaflet-js', resource='Leaflet.Editable.js'
+    )
+)
 
 # Leaflet Path.Drag.js
 leaflet_pathdrag_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-pathdrag',
     directory=os.path.join(resources_dir, 'leaflet-pathdrag'),
-    path='leaflet-pathdrag'
+    path='leaflet-pathdrag',
 )
-leaflet_pathdrag_resources.add(wr.ScriptResource(
-    name='leaflet-pathdrag-js',
-    depends='leaflet-js',
-    resource='Path.Drag.js'
-))
+leaflet_pathdrag_resources.add(
+    wr.ScriptResource(
+        name='leaflet-pathdrag-js', depends='leaflet-js', resource='Path.Drag.js'
+    )
+)
 
 # Leaflet-active-area
 leaflet_activearea_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-activearea',
     directory=os.path.join(resources_dir, 'leaflet-activearea'),
-    path='leaflet-activearea'
+    path='leaflet-activearea',
 )
-leaflet_activearea_resources.add(wr.ScriptResource(
-    name='leaflet-activearea-js',
-    depends='leaflet-js',
-    resource='leaflet.activearea.js'
-))
+leaflet_activearea_resources.add(
+    wr.ScriptResource(
+        name='leaflet-activearea-js',
+        depends='leaflet-js',
+        resource='leaflet.activearea.js',
+    )
+)
 
 # proj4js
 proj4_resources = wr.ResourceGroup(
     name='cone.maps-proj4',
     directory=os.path.join(resources_dir, 'proj4js'),
-    path='proj4js'
+    path='proj4js',
 )
-proj4_resources.add(wr.ScriptResource(
-    name='proj4-js',
-    resource='proj4-src.js',
-    compressed='proj4.js'
-))
+proj4_resources.add(
+    wr.ScriptResource(name='proj4-js', resource='proj4-src.js', compressed='proj4.js')
+)
 
 # Proj4Leaflet
 leaflet_proj4_resources = wr.ResourceGroup(
     name='cone.maps-leaflet-proj4',
     directory=os.path.join(resources_dir, 'leaflet-proj4'),
-    path='leaflet-proj4'
+    path='leaflet-proj4',
 )
-leaflet_proj4_resources.add(wr.ScriptResource(
-    name='leaflet-proj4-js',
-    depends=['leaflet-js', 'proj4-js'],
-    resource='proj4leaflet.js'
-))
+leaflet_proj4_resources.add(
+    wr.ScriptResource(
+        name='leaflet-proj4-js',
+        depends=['leaflet-js', 'proj4-js'],
+        resource='proj4leaflet.js',
+    )
+)
 
 # cone maps
 cone_maps_resources = wr.ResourceGroup(
-    name='cone.maps-maps',
-    directory=os.path.join(resources_dir, 'maps'),
-    path='maps'
+    name='cone.maps-maps', directory=os.path.join(resources_dir, 'maps'), path='maps'
 )
-cone_maps_resources.add(wr.ScriptResource(
-    name='cone-maps-js',
-    depends='leaflet-js',
-    resource='cone.maps.js',
-    compressed='cone.maps.min.js'
-))
+cone_maps_resources.add(
+    wr.ScriptResource(
+        name='cone-maps-js',
+        depends='leaflet-js',
+        resource='cone.maps.js',
+        compressed='cone.maps.min.js',
+    )
+)
 
 
 def configure_resources(config, settings):

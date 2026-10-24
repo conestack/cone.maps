@@ -8,11 +8,8 @@ import unittest
 
 
 class MapsLayer(testing.Security):
-
     def make_app(self, **kw):
-        super(MapsLayer, self).make_app(**{
-            'cone.plugins': 'cone.maps'
-        })
+        super(MapsLayer, self).make_app(**{'cone.plugins': 'cone.maps'})
 
 
 maps_layer = MapsLayer()
@@ -114,14 +111,18 @@ class TestResources(unittest.TestCase):
 
     def test_leaflet_markercluster_resources(self):
         resources_ = browser.leaflet_markercluster_resources
-        self.assertTrue(resources_.directory.endswith(np('/static/leaflet-markercluster')))
+        self.assertTrue(
+            resources_.directory.endswith(np('/static/leaflet-markercluster'))
+        )
         self.assertEqual(resources_.name, 'cone.maps-leaflet-markercluster')
         self.assertEqual(resources_.path, 'leaflet-markercluster')
 
         scripts = resources_.scripts
         self.assertEqual(len(scripts), 1)
 
-        self.assertTrue(scripts[0].directory.endswith(np('/static/leaflet-markercluster')))
+        self.assertTrue(
+            scripts[0].directory.endswith(np('/static/leaflet-markercluster'))
+        )
         self.assertEqual(scripts[0].path, 'leaflet-markercluster')
         self.assertEqual(scripts[0].file_name, 'leaflet.markercluster.js')
         self.assertTrue(os.path.exists(scripts[0].file_path))
@@ -237,26 +238,27 @@ class TestResources(unittest.TestCase):
 
         configure_resources = browser.configure_resources
         config = TestConfigurator()
-        settings = {
-            'cone.maps.public': 'false'
-        }
+        settings = {'cone.maps.public': 'false'}
         configure_resources(config, settings)
-        self.assertEqual(config.includes, {
-            'leaflet-js': 'authenticated',
-            'leaflet-css': 'authenticated',
-            'leaflet-editable-js': False,
-            'leaflet-pathdrag-js': False,
-            'leaflet-nogap-js': False,
-            'leaflet-geosearch-js': False,
-            'leaflet-geosearch-css': False,
-            'leaflet-markercluster-js': False,
-            'leaflet-markercluster-css': False,
-            'leaflet-markercluster-default-css': False,
-            'leaflet-activearea-js': False,
-            'proj4-js': False,
-            'leaflet-proj4-js': False,
-            'cone-maps-js': 'authenticated'
-        })
+        self.assertEqual(
+            config.includes,
+            {
+                'leaflet-js': 'authenticated',
+                'leaflet-css': 'authenticated',
+                'leaflet-editable-js': False,
+                'leaflet-pathdrag-js': False,
+                'leaflet-nogap-js': False,
+                'leaflet-geosearch-js': False,
+                'leaflet-geosearch-css': False,
+                'leaflet-markercluster-js': False,
+                'leaflet-markercluster-css': False,
+                'leaflet-markercluster-default-css': False,
+                'leaflet-activearea-js': False,
+                'proj4-js': False,
+                'leaflet-proj4-js': False,
+                'cone-maps-js': 'authenticated',
+            },
+        )
 
         config = TestConfigurator()
         settings = {
@@ -267,25 +269,28 @@ class TestResources(unittest.TestCase):
             'cone.maps.editable': 'true',
             'cone.maps.pathdrag': 'true',
             'cone.maps.activearea': 'true',
-            'cone.maps.proj4': 'true'
+            'cone.maps.proj4': 'true',
         }
         configure_resources(config, settings)
-        self.assertEqual(config.includes, {
-            'leaflet-js': 'authenticated',
-            'leaflet-css': 'authenticated',
-            'leaflet-editable-js': 'authenticated',
-            'leaflet-pathdrag-js': 'authenticated',
-            'leaflet-nogap-js': 'authenticated',
-            'leaflet-geosearch-js': 'authenticated',
-            'leaflet-geosearch-css': 'authenticated',
-            'leaflet-markercluster-js': 'authenticated',
-            'leaflet-markercluster-css': 'authenticated',
-            'leaflet-markercluster-default-css': 'authenticated',
-            'leaflet-activearea-js': 'authenticated',
-            'proj4-js': 'authenticated',
-            'leaflet-proj4-js': 'authenticated',
-            'cone-maps-js': 'authenticated'
-        })
+        self.assertEqual(
+            config.includes,
+            {
+                'leaflet-js': 'authenticated',
+                'leaflet-css': 'authenticated',
+                'leaflet-editable-js': 'authenticated',
+                'leaflet-pathdrag-js': 'authenticated',
+                'leaflet-nogap-js': 'authenticated',
+                'leaflet-geosearch-js': 'authenticated',
+                'leaflet-geosearch-css': 'authenticated',
+                'leaflet-markercluster-js': 'authenticated',
+                'leaflet-markercluster-css': 'authenticated',
+                'leaflet-markercluster-default-css': 'authenticated',
+                'leaflet-activearea-js': 'authenticated',
+                'proj4-js': 'authenticated',
+                'leaflet-proj4-js': 'authenticated',
+                'cone-maps-js': 'authenticated',
+            },
+        )
 
         config = TestConfigurator()
         settings = {
@@ -296,22 +301,25 @@ class TestResources(unittest.TestCase):
             'cone.maps.editable': 'true',
             'cone.maps.pathdrag': 'true',
             'cone.maps.activearea': 'true',
-            'cone.maps.proj4': 'true'
+            'cone.maps.proj4': 'true',
         }
         configure_resources(config, settings)
-        self.assertEqual(config.includes, {
-            'leaflet-js': True,
-            'leaflet-css': True,
-            'leaflet-editable-js': True,
-            'leaflet-pathdrag-js': True,
-            'leaflet-nogap-js': True,
-            'leaflet-geosearch-js': True,
-            'leaflet-geosearch-css': True,
-            'leaflet-markercluster-js': True,
-            'leaflet-markercluster-css': True,
-            'leaflet-markercluster-default-css': True,
-            'leaflet-activearea-js': True,
-            'proj4-js': True,
-            'leaflet-proj4-js': True,
-            'cone-maps-js': True
-        })
+        self.assertEqual(
+            config.includes,
+            {
+                'leaflet-js': True,
+                'leaflet-css': True,
+                'leaflet-editable-js': True,
+                'leaflet-pathdrag-js': True,
+                'leaflet-nogap-js': True,
+                'leaflet-geosearch-js': True,
+                'leaflet-geosearch-css': True,
+                'leaflet-markercluster-js': True,
+                'leaflet-markercluster-css': True,
+                'leaflet-markercluster-default-css': True,
+                'leaflet-activearea-js': True,
+                'proj4-js': True,
+                'leaflet-proj4-js': True,
+                'cone-maps-js': True,
+            },
+        )

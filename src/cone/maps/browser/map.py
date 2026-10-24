@@ -64,20 +64,22 @@ class MapTile(Tile):
     See: https://leafletjs.com/reference.html#control-layers
     """
 
-    map_layers = [{
-        # general layer options
-        'factory': 'tile_layer',   # layer factory
-        'category': 'base',        # base|overlay
-        'display': True,           # initial display
-        'title': 'OpenStreetMap',  # layer title
-        # factory specific layer options
-        'urlTemplate': '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        'options': {
-            'attribution': 'OSM map data © <a href="http://openstreetmap.org">OSM</a>',
-            'minZoom': 2,
-            'maxZoom': 18
+    map_layers = [
+        {
+            # general layer options
+            'factory': 'tile_layer',  # layer factory
+            'category': 'base',  # base|overlay
+            'display': True,  # initial display
+            'title': 'OpenStreetMap',  # layer title
+            # factory specific layer options
+            'urlTemplate': '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            'options': {
+                'attribution': 'OSM map data © <a href="http://openstreetmap.org">OSM</a>',
+                'minZoom': 2,
+                'maxZoom': 18,
+            },
         }
-    }]
+    ]
     """List of map layer definitions.
 
     See: https://leafletjs.com/reference.html
@@ -157,13 +159,13 @@ class MapTile(Tile):
             markers=self.map_markers,
             markers_source=self.map_markers_source,
             groups=self.map_marker_groups,
-            groups_source=self.map_marker_groups_source
+            groups_source=self.map_marker_groups_source,
         )
 
     def render(self):
         return (
             f'<div class="{self.map_css}"'
             f'     id="{self.map_id}"'
-            f'     data-map-settings=\'{json.dumps(self.map_settings)}\' >'
+            f"     data-map-settings='{json.dumps(self.map_settings)}' >"
             '</div>'
         )
